@@ -6,6 +6,7 @@ syntax: glob
 *.pyo
 *.swp
 *.orig
+*.rej
 dist/
 build/
 noc.egg-info/
