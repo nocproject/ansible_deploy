@@ -8,3 +8,4 @@ syntax: glob
 .vscode
 additional_roles/
 ansible.cfg
+towergen.yml
