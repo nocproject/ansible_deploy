@@ -12,6 +12,3 @@ lint:
     - ansible-playbook */*/service.yml --syntax-check
   tags:
     - docker
-  only:
-    - master
-    - tags
