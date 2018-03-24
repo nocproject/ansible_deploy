@@ -6,9 +6,10 @@ lint:
   stage: lint
   image: registry.getnoc.com/infrastructure/ansible_linter:master
   script:
+    - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
     - yamllint .
     - ansible-lint */*/service.yml -v
-    - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
     - ansible-playbook */*/service.yml --syntax-check
+    - git ls-files | xargs ansible-review -c .ansible-review -q
   tags:
     - docker
