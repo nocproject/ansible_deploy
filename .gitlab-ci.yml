@@ -1,6 +1,7 @@
 ---
 stages:
   - lint
+  - build
 
 lint:
   stage: lint
@@ -12,5 +13,15 @@ lint:
     - ansible-lint */*/service.yml -v
     - ansible-playbook */*/service.yml --syntax-check
     - git ls-files | xargs ansible-review -c .ansible-review -q
+  tags:
+    - docker
+
+build_centos:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  script:
+    - echo ${ssh_identity_text} > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s default
   tags:
     - docker
