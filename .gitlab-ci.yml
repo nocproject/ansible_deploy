@@ -25,3 +25,13 @@ build_centos:
     - molecule test -s default
   tags:
     - docker
+
+build_centos:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s debian
+  tags:
+    - docker
