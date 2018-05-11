@@ -21,7 +21,8 @@ build_centos:
   image: registry.getnoc.com/infrastructure/molecule-docker:master
   script:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
+    - id
+    - chmod 0440 /tmp/temporary_ssh_key
     - cat /tmp/temporary_ssh_key
     - ls -lah /tmp/temporary_ssh_key
     - molecule --debug test -s default
