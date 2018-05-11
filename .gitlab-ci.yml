@@ -22,6 +22,6 @@ build_centos:
   script:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s default
+    - molecule --debug test -s default
   tags:
     - docker
