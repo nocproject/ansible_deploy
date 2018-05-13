@@ -35,3 +35,33 @@ build_debian:
     - molecule test -s debian
   tags:
     - docker
+
+build_ubuntu:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s ubuntu
+  tags:
+    - docker
+
+build_freebsd:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s freebsd
+  tags:
+    - docker
+
+build_rhel:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s rhel
+  tags:
+    - docker
