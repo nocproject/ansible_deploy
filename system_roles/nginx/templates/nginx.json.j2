@@ -6,9 +6,9 @@
     "enableTagOverride": false,
     "check": {
         "http": "https://{{ noc_web_host }}/ng_stats",
-        "interval": "10s"
-    }{% if nginx_self_signed_cerificate %},
+        "interval": "10s"{% if nginx_self_signed_cerificate | ansible_distribution == "FreeBSD" %},
     "TLSSkipVerify": true{% endif %}
+    }
 
   }
 }
