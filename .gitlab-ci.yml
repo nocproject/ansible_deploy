@@ -29,6 +29,7 @@ build_centos:
   tags:
     - docker
   cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
 
@@ -45,6 +46,7 @@ build_debian:
   tags:
     - docker
   cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
 
@@ -61,6 +63,7 @@ build_ubuntu:
   tags:
     - docker
   cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
 
@@ -93,5 +96,6 @@ build_rhel:
   tags:
     - docker
   cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
