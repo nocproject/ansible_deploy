@@ -135,6 +135,7 @@ build_rhel:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
+  allow_failure: true
 
 build_oel7:
   stage: build
