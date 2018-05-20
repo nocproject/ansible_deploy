@@ -135,3 +135,21 @@ build_rhel:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
+
+build_oel7:
+  stage: build
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  variables:
+    PIP_CACHE: /root/.cache/pip
+    PKG_CACHE: /var/cache/yum
+  script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+    - molecule test -s oel7
+  tags:
+    - docker
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - /tmp/dist
+  allow_failure: true
