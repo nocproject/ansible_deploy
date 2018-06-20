@@ -15,4 +15,4 @@ Supported platforms are:
 * CentOS 7
 * RHEL 7
 * Ubuntu 16
-* FreeBSD 10.2+
+* FreeBSD 11.2+
