@@ -9,3 +9,8 @@ syntax: glob
 additional_roles/
 ansible.cfg
 towergen.yml
+bin/
+include/
+lib/
+local/
+share/
