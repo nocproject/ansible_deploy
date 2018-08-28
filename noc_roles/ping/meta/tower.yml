@@ -62,4 +62,3 @@ services:
       - noc
       - nsqlookupd
       - nsqd
-      - omap
