@@ -44,6 +44,7 @@ all:
           correlator_power: 1
           datastream_loglevel: info
           datastream_power: 2
+          datastream_mode: wait
           discovery_backup_power: 1
           discovery_loglevel: info
           discovery_max_threads: 10
@@ -391,6 +392,7 @@ all:
             - config:
                 loglevel: info
                 power: 2
+                mode: wait
               config_order: yaml:///opt/noc/etc/tower.yml,yaml:///opt/noc/etc/settings.yml,env:///NOC
               environment:
                 category: internal
