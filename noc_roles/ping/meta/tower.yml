@@ -62,3 +62,4 @@ services:
       - noc
       - nsqlookupd
       - nsqd
+      - datastream
