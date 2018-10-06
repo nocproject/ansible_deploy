@@ -31,8 +31,8 @@ lint:
     paths:
       - /tmp/dist
   only:
-    - branches@code.getnoc.com/noc/ansible_deploy
-    - master@code.getnoc.com/noc/ansible_deploy
+    - branches@noc/ansible_deploy
+    - master@noc/ansible_deploy
 
 build_centos:
   variables:
