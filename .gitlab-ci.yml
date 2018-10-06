@@ -20,19 +20,19 @@ lint:
   stage: build
   image: registry.getnoc.com/infrastructure/molecule-docker:master
   before_script:
-  - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-  - chmod 0400 /tmp/temporary_ssh_key
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
   script:
-  - molecule test -s $SCENARIO_NAME
+    - molecule test -s $SCENARIO_NAME
   tags:
-  - docker
+    - docker
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
-    - /tmp/dist
+      - /tmp/dist
   only:
-  - branches@code.getnoc.com/noc/ansible_deploy
-  - master@code.getnoc.com/noc/ansible_deploy
+    - branches@code.getnoc.com/noc/ansible_deploy
+    - master@code.getnoc.com/noc/ansible_deploy
 
 build_centos:
   variables:
