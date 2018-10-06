@@ -41,7 +41,6 @@ build_centos:
     SCENARIO_NAME: default
   <<: *base_builder
 
-
 build_debian8:
   variables:
     PIP_CACHE: /root/.cache/pip
@@ -83,7 +82,7 @@ build_rhel:
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
-    SCENARIO_NAME: freebsd
+    SCENARIO_NAME: rhel
   <<: *base_builder
   allow_failure: true  # should be fixed. with additional role for registration
 
