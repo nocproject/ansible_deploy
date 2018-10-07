@@ -75,6 +75,7 @@ build_freebsd:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/pkg
     SCENARIO_NAME: freebsd
+    USE_CACHE: "False"  # freebsd minio-client "broken"
   <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
 
