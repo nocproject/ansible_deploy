@@ -42,11 +42,13 @@ forms:
       label: "enable_administrativedomain"
       type: bool
       default: "True"
+      value: "True"
       common: environment
     enable_administrativedomain_wait:
       label: "enable_administrativedomain_wait"
       type: bool
       default: "True"
+      value: True
       common: environment
     enable_alarm:
       label: "enable_alarm"
