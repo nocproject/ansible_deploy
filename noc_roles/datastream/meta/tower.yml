@@ -48,7 +48,7 @@ forms:
       label: "enable_administrativedomain_wait"
       type: bool
       default: "True"
-      value: True
+      value: "True"
       common: environment
     enable_alarm:
       label: "enable_alarm"
