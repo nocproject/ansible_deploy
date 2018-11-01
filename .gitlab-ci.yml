@@ -16,140 +16,81 @@ lint:
   tags:
     - docker
 
-build_centos:
+.base_builder: &base_builder
   stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  before_script:
+    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
+    - chmod 0400 /tmp/temporary_ssh_key
+  script:
+    - molecule test -s $SCENARIO_NAME
+  tags:
+    - docker
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - /tmp/dist
+  only:
+    - branches@noc/ansible_deploy
+    - master@noc/ansible_deploy
+
+build_centos:
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s default
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
+    SCENARIO_NAME: default
+  <<: *base_builder
 
 build_debian8:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s debian8
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
+    SCENARIO_NAME: debian8
+  <<: *base_builder
 
 build_debian9:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s debian9
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
+    SCENARIO_NAME: debian9
+  <<: *base_builder
 
 build_ubuntu16:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s ubuntu16
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
+    SCENARIO_NAME: ubuntu16
+  <<: *base_builder
 
 build_ubuntu18:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s ubuntu18
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
-  allow_failure: true
+    SCENARIO_NAME: ubuntu18
+  <<: *base_builder
+  allow_failure: true  # lack of mongodb 3.6 support.
 
 build_freebsd:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/pkg
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s freebsd
-  tags:
-    - docker
-  cache:
-    paths:
-      - /tmp/dist
+    SCENARIO_NAME: freebsd
+    USE_CACHE: "False"  # freebsd minio-client "broken"
+  <<: *base_builder
+  allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
 
 build_rhel:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s rhel
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
-  allow_failure: true
+    SCENARIO_NAME: rhel
+  <<: *base_builder
+  allow_failure: true  # should be fixed. with additional role for registration
 
 build_oel7:
-  stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_6_5
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
-  script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - molecule test -s oel7
-  tags:
-    - docker
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - /tmp/dist
-  allow_failure: true
+    SCENARIO_NAME: oel7
+  <<: *base_builder
+  allow_failure: true  # no active users for platform
