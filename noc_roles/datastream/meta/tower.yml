@@ -40,19 +40,19 @@ forms:
     enable_administrativedomain:
       label: "enable_administrativedomain"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_administrativedomain_wait:
       label: "enable_administrativedomain_wait"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_alarm:
       label: "enable_alarm"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_alarm_wait:
       label: "enable_alarm_wait"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_cfgping:
       label: "enable_cfgping"
       type: bool
@@ -80,27 +80,27 @@ forms:
     enable_dnszone:
       label: "enable_dnszone"
       type: bool
-      default: "False"
+      default: False # yamllint disable-line rule:truthy
     enable_dnszone_wait:
       label: "enable_dnszone_wait"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_managedobject:
       label: "enable_managedobject"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_managedobject_wait:
       label: "enable_managedobject_wait"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_resourcegroup:
       label: "enable_resourcegroup"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_resourcegroup_wait:
       label: "enable_resourcegroup_wait"
       type: bool
-      default: True  # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
 
 services:
   datastream:
