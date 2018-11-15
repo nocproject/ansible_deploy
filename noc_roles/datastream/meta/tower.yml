@@ -80,7 +80,7 @@ forms:
     enable_dnszone:
       label: "enable_dnszone"
       type: bool
-      default: False # yamllint disable-line rule:truthy
+      default: False  # yamllint disable-line rule:truthy
     enable_dnszone_wait:
       label: "enable_dnszone_wait"
       type: bool
