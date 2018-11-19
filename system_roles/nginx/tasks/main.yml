@@ -28,7 +28,7 @@
     owner: "{{nginx_user}}"
   notify: reload nginx
   when:
-    - 'svc-datastream-exec' in groups
+    - "'svc-datastream-exec' in groups"
   tags:
     - config
 
