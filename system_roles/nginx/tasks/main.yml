@@ -28,7 +28,7 @@
     owner: "{{nginx_user}}"
   notify: reload nginx
   when:
-    - datastream_whitelist_access is defined
+    - 'svc-datastream-exec' in groups
   tags:
     - config
 
