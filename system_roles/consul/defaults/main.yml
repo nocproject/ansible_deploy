@@ -65,5 +65,3 @@ consul_token: ""
 
 consul_home: "/home/{{consul_user}}"
 consul_config_path: "{{etc_prefix}}/consul"
-
-http_proxy: ""
