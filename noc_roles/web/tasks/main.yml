@@ -29,3 +29,19 @@
     NOC_CONFIG: "{{config_order}}"
   tags:
     - requirements
+
+- name: "Install NOC theme"
+  set_fact:
+      web_theme: "noc"
+  command: "{{ noc_root }}/scripts/deploy/install-packages requirements/theme-noc.json"
+  args:
+    chdir: "{{ noc_root }}"
+  environment:
+    http_proxy: "{{http_proxy}}"
+    https_proxy: "{{http_proxy}}"
+    NOC_CONFIG: "{{config_order}}"
+  when:
+  - web_theme is defined
+  - "web_theme == 'modern'"
+  tags:
+    - requirements
