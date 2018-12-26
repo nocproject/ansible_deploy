@@ -32,7 +32,7 @@
 
 - name: "Install NOC theme"
   set_fact:
-      web_theme: "noc"
+    web_theme: "noc"
   command: "{{ noc_root }}/scripts/deploy/install-packages requirements/theme-noc.json"
   args:
     chdir: "{{ noc_root }}"
@@ -41,7 +41,7 @@
     https_proxy: "{{http_proxy}}"
     NOC_CONFIG: "{{config_order}}"
   when:
-  - web_theme is defined
-  - "web_theme == 'modern'"
+    - web_theme is defined
+    - "web_theme == 'modern'"
   tags:
     - requirements
