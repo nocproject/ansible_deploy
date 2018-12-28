@@ -5,6 +5,7 @@
     requirements: "requirements/prod.txt"
     virtualenv: "{{ noc_root }}"
     extra_args: "--trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/simple/ --upgrade"
+  retries: 2
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
@@ -22,6 +23,7 @@
     requirements: "requirements/python-2.6.txt"
     virtualenv: "{{ noc_root }}"
     extra_args: "--upgrade"
+  retries: 2
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"

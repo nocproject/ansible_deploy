@@ -3,6 +3,7 @@
   pip:
     name: "{{ packages }}"
     virtualenv: "{{ consul_control_venv }}"
+  retries: 2
   vars:
     packages:
       - "python-consul=={{ python_consul_version }}"
