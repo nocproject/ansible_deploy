@@ -7,24 +7,24 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-      - all
-    #  - lucid
-    #  - maverick
-    #  - natty
-    #  - oneiric
-    #  - precise
-    #  - quantal
-    #  - raring
-    #  - saucy
-    #  - trusty
+        - all
+     #  - lucid
+     #  - maverick
+     #  - natty
+     #  - oneiric
+     #  - precise
+     #  - quantal
+     #  - raring
+     #  - saucy
+     #  - trusty
     - name: Debian
       versions:
-      - all
-    #  - etch
-    #  - lenny
-    #  - squeeze
-    #  - wheezy
+        - all
+     #  - etch
+     #  - lenny
+     #  - squeeze
+     #  - wheezy
     - name: EL
       versions:
-      - 6
-      - 7
+        - 6
+        - 7
