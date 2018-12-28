@@ -6,6 +6,8 @@
     virtualenv: "{{ noc_root }}"
     extra_args: "--trusted-host cdn.getnoc.com --find-links https://cdn.getnoc.com/npkg/simple/ --upgrade"
   retries: 2
+  register: install_status
+  until: install_status is success
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"
@@ -24,6 +26,8 @@
     virtualenv: "{{ noc_root }}"
     extra_args: "--upgrade"
   retries: 2
+  register: install_status
+  until: install_status is success
   environment:
     http_proxy: "{{ http_proxy }}"
     https_proxy: "{{ http_proxy }}"

@@ -4,6 +4,8 @@
     name: "{{ packages }}"
     virtualenv: "{{ consul_control_venv }}"
   retries: 2
+  register: install_status
+  until: install_status is success
   vars:
     packages:
       - "python-consul=={{ python_consul_version }}"
