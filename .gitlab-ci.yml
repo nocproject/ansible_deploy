@@ -10,7 +10,7 @@ lint:
     - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
     - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
     - yamllint .
-    - ansible-lint */*/service.yml -v
+    - ansible-lint */*/service.yml -v -x ANSIBLE0204
     - ansible-playbook */*/service.yml --syntax-check
     - git ls-files | grep -v molecule/| xargs ansible-review -c .ansible-review -q
   tags:
