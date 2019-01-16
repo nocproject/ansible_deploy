@@ -47,10 +47,10 @@
     - config
 
 - name: Create database user
-  command: >
-    "{{ mongo_path }} -u {{ noc_mongo_admin_user }} -p {{ mongod_password }} {{ mongod_db }}
-    --authenticationDatabase admin {{ mongo_dir }}/userinit.js"
+  command: "{{ mongo_path }} -u {{ noc_mongo_admin_user }} -p '{{ mongod_password }}' {{ mongod_db }} --authenticationDatabase admin {{ mongo_dir }}/userinit.js"
   when: user_status is changed
+  tags:
+  - skip_ansible_lint
 
 - name: Update replica set configuration
   command: "{{ mongo_path }} -u {{ noc_mongo_admin_user }} -p '{{ mongod_password }}' admin {{ mongo_dir }}/rsinit.js"
