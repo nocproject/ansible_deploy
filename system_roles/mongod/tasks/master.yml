@@ -48,7 +48,7 @@
 
 - name: Create database user
   command: >
-    "{{ mongo_path }} -u {{ noc_mongo_admin_user }} -p '{{ mongod_password }}' {{ mongod_db }}
+    "{{ mongo_path }} -u {{ noc_mongo_admin_user }} -p {{ mongod_password }} {{ mongod_db }}
     --authenticationDatabase admin {{ mongo_dir }}/userinit.js"
   when: user_status is changed
 
