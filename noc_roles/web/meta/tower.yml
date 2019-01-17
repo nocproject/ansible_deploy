@@ -38,8 +38,8 @@ forms:
       label: "NOC web theme"
       type: list
       options:
-      - "classic"
-      - "modern"
+        - "classic"
+        - "modern"
     max_threads:
       default: 10
       label: "Web threads"
