@@ -60,6 +60,19 @@ server {
 
     client_max_body_size 32m;
 
+    gzip on;
+    gzip_vary on;
+    gzip_comp_level 3;
+    gzip_types text/html;
+    gzip_types text/json;
+    gzip_types text/css;
+    gzip_types text/x-js;
+    gzip_types text/javascript;
+    gzip_types application/x-javascript;
+    gzip_types application/json;
+    gzip_types application/javascript;
+
+
     access_log  {{ nginx_log_dir }}/noc.access.log noc_format;
     error_log  {{ nginx_log_dir }}/noc.error.log;
 
@@ -87,9 +100,6 @@ server {
     location /inv/monitor/ {
         proxy_pass http://noc-web;
         auth_request /api/auth/auth/;
-        proxy_read_timeout 900;
-        gzip on;
-        gzip_types text/html text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -105,9 +115,6 @@ server {
     location /fm/monitor/data2/ {
         proxy_pass http://noc-web;
         auth_request /api/auth/auth/;
-        proxy_read_timeout 900;
-        gzip on;
-        gzip_types text/html text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -125,9 +132,6 @@ server {
     location /api/auth/ {
         internal;
         proxy_pass http://login;
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -141,8 +145,6 @@ server {
     # Login service api
     location /api/login/ {
         proxy_pass http://login;
-        gzip on;
-        gzip_types text/css text/x-js;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -158,9 +160,6 @@ server {
     location /api/card/ {
         proxy_pass http://card;
         auth_request /api/auth/auth/;
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -180,9 +179,6 @@ server {
         proxy_pass http://mrt;
         proxy_read_timeout 900;
         auth_request /api/auth/auth/;
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -201,9 +197,6 @@ server {
     location /api/bi/ {
         proxy_pass http://bi;
         auth_request /api/auth/auth/;
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -218,8 +211,7 @@ server {
     location /ui/bi2/ {
         alias {{ noc_root }}/ui/bi2/;
         try_files $uri /index.html =404;
-        gzip on;
-        gzip_types text/css text/javascript application/x-javascript application/json;
+
         access_log  {{ nginx_log_dir }}/static.access.log noc_format;
     }
 {% endif %}
@@ -230,9 +222,6 @@ server {
     location /api/grafanads/ {
         proxy_pass http://grafanads;
         auth_request /api/auth/auth/;
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -254,9 +243,6 @@ server {
         {% if datastream_whitelist_access and datastream_whitelist_access is defined and 'svc-datastream-exec' in groups and groups['svc-datastream-exec'] | length > 0 %}
         include allow_ip_datastream.conf;
         {% endif %}
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -277,9 +263,6 @@ server {
         {% if nbi_whitelist_access and nbi_whitelist_access is defined and 'svc-nbi-exec' in groups and groups['svc-nbi-exec'] | length > 0 %}
         include allow_ip_nbi.conf;
         {% endif %}
-        # internal;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
@@ -294,24 +277,27 @@ server {
     # Legacy django media
     location ^~ /media/ {
         alias {{ noc_root }}/django/contrib/admin/static/;
-        gzip on;
-        gzip_types text/css text/javascript application/x-javascript application/json text/x-js application/javascript;
+        expires max;
+        add_header Cache-Control public;
+        add_header Pragma public;
         access_log  {{ nginx_log_dir }}/static.access.log noc_format;
     }
 
     # Legacy static resources
     location ^~ /static/ {
         alias {{ noc_root }}/static/;
-        gzip on;
-        gzip_types text/css text/javascript application/x-javascript application/json text/x-js application/javascript;
+        add_header Cache-Control public;
+        add_header Pragma public;
+        expires 1M;
         access_log  {{ nginx_log_dir }}/static.access.log noc_format;
     }
 
     # UI files
     location ^~ /ui/ {
         alias {{ noc_root }}/ui/;
-        gzip on;
-        gzip_types text/css text/javascript application/x-javascript application/json text/x-js application/javascript;
+        add_header Cache-Control public;
+        add_header Pragma public;
+        expires 1w;
         access_log  {{ nginx_log_dir }}/static.access.log noc_format;
     }
 
@@ -319,40 +305,10 @@ server {
     location /ui/bi/editor/ {
         alias {{ noc_root }}/ui/bi/;
         try_files $uri /index.html =404;
-        gzip on;
-        gzip_types text/css text/javascript application/x-javascript application/json;
+        add_header Cache-Control public;
+        add_header Pragma public;
+        expires 1w;
         access_log  {{ nginx_log_dir }}/static.access.log noc_format;
-    }
-{% endif %}
-
-{% if 'svc-notebook-exec' in groups and groups['svc-notebook-exec'] | length > 0 %}
-    location ~* ^/notebook/(api/kernels/[^/]+/(channels|iopub|shell|stdin)|terminals/websocket)/? {
-        proxy_pass http://notebook;
-        gzip on;
-        gzip_types text/css text/x-js;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Scheme $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        # Websockets support
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_read_timeout 86400;
-        access_log  {{ nginx_log_dir }}/notebook.access.log noc_format;
-    }
-
-    location /notebook {
-        proxy_pass http://notebook;
-        gzip on;
-        gzip_types text/css text/x-js;
-        proxy_set_header Host $http_host;
-        proxy_set_header X-Scheme $scheme;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        access_log  {{ nginx_log_dir }}/notebook.access.log noc_format;
     }
 {% endif %}
 
@@ -379,9 +335,6 @@ server {
         rewrite ^/$ /main/desktop/;
         proxy_pass http://noc-web;
         auth_request /api/auth/auth/;
-        proxy_read_timeout 900;
-        gzip on;
-        gzip_types text/css text/x-js text/json;
         proxy_set_header Host $http_host;
         proxy_set_header X-Scheme $scheme;
         proxy_set_header X-Real-IP $remote_addr;
