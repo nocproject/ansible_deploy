@@ -24,7 +24,7 @@
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
   when:
-    - ansible_distribution != "Ubuntu"
+    - ansible_distribution == "Ubuntu"
     - ansible_distribution_version != "18.04"
   tags:
     - repo
