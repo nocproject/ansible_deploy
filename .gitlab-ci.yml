@@ -3,6 +3,9 @@ stages:
   - lint
   - build
 
+variables:
+  ANSIBLE_FORCE_COLOR: 'true'
+
 lint:
   stage: lint
   image: registry.getnoc.com/infrastructure/ansible_linter:master
