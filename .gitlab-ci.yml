@@ -50,6 +50,7 @@ build_debian8:
     PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: debian8
   <<: *base_builder
+  allow_failure: true  # oldstable.
 
 build_debian9:
   variables:
