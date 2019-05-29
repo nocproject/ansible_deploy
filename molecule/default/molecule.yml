@@ -26,7 +26,9 @@ provisioner:
   name: ansible
   config_options:
     defaults:
-      force_color: 1
+      force_color: true
+      strategy_plugins: /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy
+      strategy: mitogen_linear
   env:
     ANSIBLE_ROLES_PATH: $PWD/additional_roles:$PWD/system_roles:$PWD/noc_roles
     TOWER_SHOW_SECRETS: "True"
