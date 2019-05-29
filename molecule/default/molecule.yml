@@ -40,7 +40,7 @@ provisioner:
     ANSIBLE_TIMEOUT: "30"
     DIFF_ALWAYS: "True"
     ANSIBLE_STRATEGY_PLUGINS: /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy
-    ANSIBLE_STRATEGY: mitogen_linear
+#    ANSIBLE_STRATEGY: mitogen_linear
   playbooks:
     create: ../common/create.yml
     prepare: ../common/prepare.yml

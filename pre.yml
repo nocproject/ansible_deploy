@@ -4,6 +4,7 @@
   become: "False"
   any_errors_fatal: "{{ tower_run_checks }}"
   gather_facts: "True"
+  strategy: mitogen_linear
   tags:
     - pre
   vars_files:
