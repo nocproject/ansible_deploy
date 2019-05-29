@@ -27,8 +27,8 @@ provisioner:
   config_options:
     defaults:
       force_color: true
-      strategy_plugins: /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy
-      strategy: mitogen_linear
+#      strategy_plugins: /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy
+#      strategy: mitogen_linear
   env:
     ANSIBLE_ROLES_PATH: $PWD/additional_roles:$PWD/system_roles:$PWD/noc_roles
     TOWER_SHOW_SECRETS: "True"
@@ -39,6 +39,8 @@ provisioner:
     ANSIBLE_GATHER_TIMEOUT: "60"
     ANSIBLE_TIMEOUT: "30"
     DIFF_ALWAYS: "True"
+    ANSIBLE_STRATEGY_PLUGINS: /usr/lib/python2.7/site-packages/ansible_mitogen/plugins/strategy
+    ANSIBLE_STRATEGY: mitogen_linear
   playbooks:
     create: ../common/create.yml
     prepare: ../common/prepare.yml
