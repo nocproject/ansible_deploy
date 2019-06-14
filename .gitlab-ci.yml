@@ -14,6 +14,7 @@ lint:
     - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
     - yamllint --version
     - yamllint .
+    - ansible-lint --version
     - ansible-lint */*/service.yml -v
     - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
