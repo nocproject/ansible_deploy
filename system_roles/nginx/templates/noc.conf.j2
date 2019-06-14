@@ -105,6 +105,11 @@ server {
     location /api/auth/ {
         internal;
         proxy_pass http://login;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Original-URI $request_uri;
         proxy_set_header Content-Length '0';
     }
@@ -112,6 +117,11 @@ server {
     # Login service api
     location /api/login/ {
         proxy_pass http://login;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-Original-URI $request_uri;
     }
 {% endif %}
@@ -172,6 +182,13 @@ server {
         include allow_ip_datastream.conf;
         {% endif %}
         auth_request_set $apiaccess $upstream_http_x_noc_api_access;
+        proxy_set_header Remote-User $user;
+        proxy_set_header Remote-Groups $groups;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-NOC-API-Access $apiaccess;
     }
 {% endif %}
@@ -186,6 +203,13 @@ server {
         include allow_ip_nbi.conf;
         {% endif %}
         auth_request_set $apiaccess $upstream_http_x_noc_api_access;
+        proxy_set_header Remote-User $user;
+        proxy_set_header Remote-Groups $groups;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header X-NOC-API-Access $apiaccess;
     }
 {% endif %}
@@ -231,6 +255,13 @@ server {
         rewrite  ^/ui/grafana/(.*)  /$1 break;
         auth_request_set $user $upstream_http_remote_user;
         auth_request_set $groups $upstream_http_remote_groups;
+        proxy_set_header Remote-User $user;
+        proxy_set_header Remote-Groups $groups;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_set_header Authorization "";
     }
 {% endif %}
