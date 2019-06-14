@@ -12,9 +12,12 @@ lint:
   script:
     - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
     - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
+    - yamllint --version
     - yamllint .
-  #  - ansible-lint */*/service.yml -v #I should look into errors more clearly after few months
+  #  - ansible-lint */*/service.yml -v #I should look into errors more clearly after few monthsa
+    - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
+    - ansible-review --version 
     - git ls-files | grep -v molecule/| xargs ansible-review -c .ansible-review -q
   tags:
     - docker
@@ -26,6 +29,8 @@ lint:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
   script:
+    - molecule --version
+    - ansible-playbook --version
     - molecule test -s $SCENARIO_NAME
   tags:
     - docker
