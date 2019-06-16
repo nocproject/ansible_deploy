@@ -115,7 +115,8 @@
     - rs_init
 
 - name: rs_reinit
-  include_tasks: "rs_update.yml"
+  include_tasks:
+    file: rs_update.yml
     apply:
       delegate_to: "{{ groups['svc-mongo-primary'][0] }}"
   when:
