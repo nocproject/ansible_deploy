@@ -67,9 +67,11 @@
             <!-- <password></password> -->
             <networks incl="networks" replace="replace">
                 <ip>127.0.0.1</ip>
+                {% if 'svc-grafana-exec' in groups %}
             {% for n in groups['svc-grafana-exec'] %}
                 <ip>{{ hostvars[n].ansible_host }}</ip>
             {% endfor %}
+                {% endif %}
                 {% if 'svc-bi-exec' in groups %}
             {% for n in groups['svc-bi-exec'] %}
                 <ip>{{ hostvars[n].ansible_host }}</ip>
