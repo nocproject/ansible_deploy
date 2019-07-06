@@ -26,10 +26,10 @@
       with_items: "{{ molecule_yml.platforms }}"
 
     - debug:
-      msg: "{{ server }}"
+      var: "server" 
 
     - debug:
-      msg: "{{ server.results }}"
+      var: "server.results"
 
     - name: Populate instance config dict
       set_fact:
@@ -45,10 +45,10 @@
       when: server is changed
 
     - debug:
-      msg: "{{ instance_conf_dict }}"
+      var: "instance_conf_dict"
 
     - debug:
-      msg: "{{ instance_config_dict }}"
+      var: "instance_config_dict"
 
     - name: Convert instance config dict to a list
       set_fact:
@@ -56,7 +56,7 @@
       when: server is changed
 
     - debug:
-      msg: "{{ instance_conf_dict }}"
+      var: "instance_conf_dict"
 
     - name: Dump instance config
       copy:
@@ -67,4 +67,4 @@
       when: server is changed
 
     - debug:
-      msg: "{{ {{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }} }}"
+      var: "instance_conf | to_json | from_json | molecule_to_yaml | molecule_header"
