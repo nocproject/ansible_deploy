@@ -25,6 +25,12 @@
       register: server
       with_items: "{{ molecule_yml.platforms }}"
 
+    - debug:
+      msg: "{{ server }}"
+
+    - debug:
+      msg: "{{ server.results }}"  
+
     - name: Populate instance config dict
       set_fact:
         instance_conf_dict: {
@@ -38,10 +44,19 @@
       register: instance_config_dict
       when: server is changed
 
+    - debug:
+      msg: "{{ instance_conf_dict }}"
+
+    - debug:
+      msg: "{{ instance_config_dict }}"      
+
     - name: Convert instance config dict to a list
       set_fact:
         instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
       when: server is changed
+    
+    - debug:
+      msg: "{{ instance_conf_dict }}"
 
     - name: Dump instance config
       copy:
@@ -50,3 +65,6 @@
         content: "{{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}"
         dest: "{{ molecule_instance_config }}"
       when: server is changed
+
+    - debug:
+      msg: "{{ {{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }} }}"
