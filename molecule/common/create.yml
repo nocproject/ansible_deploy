@@ -29,7 +29,7 @@
       msg: "{{ server }}"
 
     - debug:
-      msg: "{{ server.results }}"  
+      msg: "{{ server.results }}"
 
     - name: Populate instance config dict
       set_fact:
@@ -48,13 +48,13 @@
       msg: "{{ instance_conf_dict }}"
 
     - debug:
-      msg: "{{ instance_config_dict }}"      
+      msg: "{{ instance_config_dict }}"
 
     - name: Convert instance config dict to a list
       set_fact:
         instance_conf: "{{ instance_config_dict.results | map(attribute='ansible_facts.instance_conf_dict') | list }}"
       when: server is changed
-    
+
     - debug:
       msg: "{{ instance_conf_dict }}"
 
