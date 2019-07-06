@@ -30,6 +30,7 @@ lint:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
   script:
+    - export ANSIBLE_INVALID_TASK_ATTRIBUTE_FAILED=False
     - molecule --version
     - ansible-playbook --version
     - molecule test -s $SCENARIO_NAME
