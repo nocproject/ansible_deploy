@@ -57,7 +57,7 @@
 
     - debug:
         var: "instance_conf_dict"
-        
+
     - debug:
         var: "instance_conf"
 
