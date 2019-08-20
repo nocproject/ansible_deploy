@@ -44,7 +44,8 @@
     owner: "{{ nginx_user }}"
   notify: reload nginx
   when:
-    - 'svc-datastream-exec' in groups and groups['svc-datastream-exec'] | length > 0
+    - "'svc-datastream-exec' in groups"
+    - "groups['svc-datastream-exec'] | length > 0"
   tags:
     - config
 
