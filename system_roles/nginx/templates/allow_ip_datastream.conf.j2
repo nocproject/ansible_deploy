@@ -1,8 +1,6 @@
 #jinja2: lstrip_blocks: True
-{% if 'svc-datastream-exec' in groups and groups['svc-datastream-exec'] | length > 0 %}
 {% set ipadr = hostvars[groups['svc-datastream'][0]].datastream_whitelist_access.split(',') %}
 {% for ip in ipadr %}
 allow {{ ip }};
 {% endfor %}
-{% endif %}
 deny all;
