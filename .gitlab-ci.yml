@@ -65,6 +65,13 @@ build_debian9:
     SCENARIO_NAME: debian9
   <<: *base_builder
 
+build_debian10:
+  variables:
+    PIP_CACHE: /root/.cache/pip
+    PKG_CACHE: /var/cache/apt/archives
+    SCENARIO_NAME: debian10
+  <<: *base_builder
+
 build_ubuntu16:
   variables:
     PIP_CACHE: /root/.cache/pip
