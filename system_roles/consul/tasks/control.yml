@@ -2,7 +2,7 @@
 - name: Install python-consul and consulate
   pip:
     name: "{{ packages }}"
-    executable: {{ virtualenv_executable }}
+    executable: "{{ virtualenv_executable }}"
     virtualenv: "{{ consul_control_venv }}"
   retries: 2
   register: install_status
