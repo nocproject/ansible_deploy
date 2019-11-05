@@ -9,7 +9,7 @@ resource "yandex_compute_instance" "vm-1" {
   name = "noc-node-{{ item.distr }}"
 
   resources {
-    cores         = 2
+    cores         = 4
     memory        = 4
     core_fraction = 100
   }
