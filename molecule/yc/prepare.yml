@@ -12,6 +12,6 @@
       raw: apt -y update && apt install -y python-minimal
       when: molecule_yml.platforms[0].distr is match("ubuntu.*")
 
-    #    - name: download caches
-    #      import_tasks: cache_download.yml
-    #      when: use_cache
+#    - name: download caches
+#      import_tasks: cache_download.yml
+#      when: use_cache
