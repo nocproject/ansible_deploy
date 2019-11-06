@@ -17,11 +17,12 @@ lint:
     - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
     - ansible-lint --version
-    #    - ansible-lint */*/service.yml -v
+    #- ansible-lint */*/service.yml -v
     - ansible-review --version
     - git ls-files | grep -v molecule/| xargs ansible-review -c .ansible-review -q
   tags:
     - docker
+    - cloud
 
 .base_builder: &base_builder
   stage: build
@@ -29,12 +30,12 @@ lint:
   before_script:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
+    - echo ${ssh_identity_text_pub} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key_pub
+    - chmod 0644 /tmp/temporary_ssh_key_pub
   script:
     - molecule --version
     - ansible-playbook --version
     - molecule test -s $SCENARIO_NAME
-  tags:
-    - docker
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
@@ -48,21 +49,40 @@ build_centos:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
     SCENARIO_NAME: default
+  tags:
+    - cloud
+    - docker
   <<: *base_builder
-
 
 build_debian9:
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: debian9
+  tags:
+    - cloud
+    - docker
   <<: *base_builder
+
+build_debian10:
+  variables:
+    PIP_CACHE: /root/.cache/pip
+    PKG_CACHE: /var/cache/apt/archives
+    SCENARIO_NAME: debian10
+  tags:
+    - cloud
+    - docker
+  <<: *base_builder
+  allow_failure: true
 
 build_ubuntu16:
   variables:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: ubuntu16
+  tags:
+    - satel
+    - docker
   <<: *base_builder
 
 build_ubuntu18:
@@ -70,8 +90,10 @@ build_ubuntu18:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: ubuntu18
+  tags:
+    - cloud
+    - docker
   <<: *base_builder
-  allow_failure: true  # lack of mongodb 3.6 support.
 
 build_freebsd:
   variables:
@@ -79,6 +101,9 @@ build_freebsd:
     PKG_CACHE: /var/cache/pkg
     SCENARIO_NAME: freebsd
     USE_CACHE: "False"  # freebsd minio-client "broken"
+  tags:
+    - satel
+    - docker
   <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
 
@@ -87,5 +112,8 @@ build_oel7:
     PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
     SCENARIO_NAME: oel7
+  tags:
+    - satel
+    - docker
   <<: *base_builder
   allow_failure: true  # no active users for platform
