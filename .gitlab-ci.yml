@@ -13,11 +13,11 @@ lint:
     - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
     - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
     - yamllint --version
-    #- yamllint -s .
+    - yamllint -s .
     - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
     - ansible-lint --version
-    #- ansible-lint */*/service.yml -v
+    - ansible-lint */*/service.yml -v
     - ansible-review --version
     - git ls-files | grep -v molecule/| xargs ansible-review -c .ansible-review -q
   tags:
@@ -106,17 +106,6 @@ build_freebsd:
     - docker
   <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
-
-#build_rhel:
-#  variables:
-#    PIP_CACHE: /root/.cache/pip
-#    PKG_CACHE: /var/cache/yum
-#    SCENARIO_NAME: rhel
-#  tags:
-#    - satel
-#    - docker
-#  <<: *base_builder
-#  allow_failure: true  # should be fixed. with additional role for registration
 
 build_oel7:
   variables:
