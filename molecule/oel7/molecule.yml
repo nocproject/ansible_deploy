@@ -12,7 +12,7 @@ driver:
   validate_certs: "no"
   resource_pool: ${resource_pool}
   folder: ${folder}
-  ssh_identity_file: "/tmp/temporary_ssh_key"
+  ssh_identity_file: ${id_rsa}
   ssh_user: vagrant
   ssh_port: 22
 lint:
