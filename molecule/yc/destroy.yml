@@ -9,5 +9,5 @@
         project_path: "../yc/"
         state: absent
         force_init: true  # yamllint disable-line rule:truthy
-        purge_workspace: yes
+        purge_workspace: true  # yamllint disable-line rule:truthy
       with_items: "{{ molecule_yml.platforms }}"
