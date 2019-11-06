@@ -27,11 +27,6 @@ lint:
 .base_builder: &base_builder
   stage: build
   image: registry.getnoc.com/infrastructure/molecule-docker:master
-  before_script:
-    - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
-    - chmod 0400 /tmp/temporary_ssh_key
-    - echo ${ssh_identity_text_pub} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key_pub
-    - chmod 0644 /tmp/temporary_ssh_key_pub
   script:
     - molecule --version
     - ansible-playbook --version
