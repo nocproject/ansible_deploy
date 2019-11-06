@@ -4,8 +4,8 @@ dependency:
 
 driver:
   name: delegated
-  ssh_identity_file: ${id_rsa}
-  ssh_identity_file_pub: ${id_rsa.pub}
+  ssh_identity_file: "/tmp/temporary_ssh_key"
+  ssh_identity_file_pub: "/tmp/temporary_ssh_key_pub"
   ssh_port: 22
   token: ${yc_token}
   cloud_id: ${yc_cloud_id}
