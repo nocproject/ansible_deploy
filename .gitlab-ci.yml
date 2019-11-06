@@ -81,7 +81,7 @@ build_ubuntu16:
     PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: ubuntu16
   tags:
-    - satel
+    - cloud
     - docker
   <<: *base_builder
 
