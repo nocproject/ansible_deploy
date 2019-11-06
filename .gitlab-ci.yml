@@ -50,13 +50,6 @@ build_centos:
     SCENARIO_NAME: default
   <<: *base_builder
 
-build_debian8:
-  variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/apt/archives
-    SCENARIO_NAME: debian8
-  <<: *base_builder
-  allow_failure: true  # oldstable.
 
 build_debian9:
   variables:
@@ -88,14 +81,6 @@ build_freebsd:
     USE_CACHE: "False"  # freebsd minio-client "broken"
   <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
-
-build_rhel:
-  variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/yum
-    SCENARIO_NAME: rhel
-  <<: *base_builder
-  allow_failure: true  # should be fixed. with additional role for registration
 
 build_oel7:
   variables:
