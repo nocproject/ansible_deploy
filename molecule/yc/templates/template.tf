@@ -35,13 +35,6 @@ resource "yandex_compute_instance" "vm-1" {
   }
 }
 
-//resource "yandex_vpc_subnet" "subnet-2" {
-//  name           = "subnet-sova-2"
-//  zone           = "{{ molecule_yml.driver.zone }}"
-//  network_id     = "{{ molecule_yml.driver.network_id }}"
-//  v4_cidr_blocks = ["10.10.20.0/24"]
-//}
-
 output "internal_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface[0].ip_address
 }
