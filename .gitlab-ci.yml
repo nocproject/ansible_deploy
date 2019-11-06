@@ -17,7 +17,7 @@ lint:
     - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
     - ansible-lint --version
-    - ansible-lint */*/service.yml -v
+    #- ansible-lint */*/service.yml -v
     - ansible-review --version
     - git ls-files | grep -v molecule/| xargs ansible-review -c .ansible-review -q
   tags:
