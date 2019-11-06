@@ -55,7 +55,6 @@ scenario:
     - prepare
     - converge
     - verify
-#    - side_effect
     - destroy
 verifier:
   name: goss
