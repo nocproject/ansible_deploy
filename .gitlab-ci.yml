@@ -73,7 +73,6 @@ build_debian10:
     - cloud
     - docker
   <<: *base_builder
-  allow_failure: true
 
 build_ubuntu16:
   variables:
