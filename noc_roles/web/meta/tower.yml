@@ -34,12 +34,12 @@ forms:
         - "ru"
         - "pt_BR"
     theme:
-      default: "classic"
+      default: "gray"
       label: "NOC web theme"
       type: list
       options:
-        - "classic"
-        - "modern"
+        - "gray"
+        - "noc"
     max_threads:
       default: 10
       label: "Web threads"

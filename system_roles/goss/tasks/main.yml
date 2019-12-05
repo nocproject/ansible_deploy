@@ -20,11 +20,13 @@
 
   when:
     - goss_complete is not defined
+    - has_svc_goss is defined
 
 - name: "Include service"
   import_tasks: service.yml
   when:
     - goss_service_name is defined
+    - has_svc_goss is defined
 
 - name: set goss complete
   set_fact:

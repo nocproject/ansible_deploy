@@ -34,20 +34,13 @@
   command: "{{ noc_root }}/scripts/deploy/install-packages requirements/theme-noc.json"
   args:
     chdir: "{{ noc_root }}"
+  changed_when: "'CHANGED' in s.stdout"
   environment:
     http_proxy: "{{http_proxy}}"
     https_proxy: "{{http_proxy}}"
     NOC_CONFIG: "{{config_order}}"
   when:
     - web_theme is defined
-    - "web_theme == 'modern'"
-  tags:
-    - requirements
-
-- set_fact:
-    web_theme: "noc"
-  when:
-    - web_theme is defined
-    - "web_theme == 'modern'"
+    - web_theme == 'noc'
   tags:
     - requirements
