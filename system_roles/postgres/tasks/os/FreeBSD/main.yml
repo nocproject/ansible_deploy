@@ -1,7 +1,7 @@
 ---
 - name: "Install PostgreSQL 1/2"
   pkgng:
-    name: 'postgresql11-server'
+    name: 'postgresql{{ postgres_version|replace(".","") }}-server'
     state: present
   tags:
     - requirements
@@ -13,7 +13,7 @@
   vars:
     packages:
       - 'py27-psycopg2'
-      - 'postgresql11-contrib'
+      - 'postgresql{{ postgres_version|replace(".","") }}-contrib'
   tags:
     - requirements
 
@@ -32,4 +32,4 @@
   # pg_ctl: could not read file "/usr/local/pgsql/data/postmaster.opts"
   command: service postgresql start
   args:
-    creates: /var/db/postgres/data11/postmaster.opts
+    creates: /var/db/postgres/data{{ postgres_version|replace(".","") }}/postmaster.opts
