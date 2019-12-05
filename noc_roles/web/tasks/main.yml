@@ -34,7 +34,6 @@
   command: "{{ noc_root }}/scripts/deploy/install-packages requirements/theme-noc.json"
   args:
     chdir: "{{ noc_root }}"
-  changed_when: "'CHANGED' in s.stdout"
   environment:
     http_proxy: "{{http_proxy}}"
     https_proxy: "{{http_proxy}}"
