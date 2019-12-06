@@ -23,7 +23,7 @@
   file:
     path: "{{ item }}"
     state: "directory"
-    mode: 0775
+    mode: 0755
     group: clickhouse
     owner: clickhouse
     recurse: "True"
