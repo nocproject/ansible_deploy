@@ -1,6 +1,10 @@
 ---
 - name: Install Grafana
   pkgng: name="grafana5" state=present
+  register: freebsd_pkg_result
+    retries: 4
+    delay: 2
+    until: freebsd_pkg_result is succeeded
 
 - name: Create Grafana directories
   file: path={{ item }} state=directory owner={{ grafana_user }} mode=0755
