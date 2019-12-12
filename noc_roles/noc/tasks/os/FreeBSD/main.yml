@@ -16,9 +16,9 @@
   tags:
     - requirements
   register: freebsd_pkg_result
-    retries: 4
-    delay: 2
-    until: freebsd_pkg_result is succeeded
+  retries: 4
+  delay: 2
+  until: freebsd_pkg_result is succeeded
 
 - name: Create symlink for virtualenv
   file:

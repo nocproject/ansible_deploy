@@ -6,9 +6,9 @@
   tags:
     - requirements
   register: freebsd_pkg_result
-    retries: 4
-    delay: 2
-    until: freebsd_pkg_result is succeeded
+  retries: 4
+  delay: 2
+  until: freebsd_pkg_result is succeeded
 
 - name: "Install PostgreSQL 2/2"
   pkgng:
@@ -21,9 +21,9 @@
   tags:
     - requirements
   register: freebsd_pkg_result
-    retries: 4
-    delay: 2
-    until: freebsd_pkg_result is succeeded
+  retries: 4
+  delay: 2
+  until: freebsd_pkg_result is succeeded
 
 - name: Enable postgres system service
   service:
