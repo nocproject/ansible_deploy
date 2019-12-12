@@ -20,7 +20,7 @@ lint:
 platforms:
   - name: noc_node_freebsd12
     template: packer-freebsd12
-    memory: 3072
+    memory: 4096
     cpu: 2
 provisioner:
   name: ansible
