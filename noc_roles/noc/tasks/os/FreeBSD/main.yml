@@ -26,6 +26,7 @@
     dest: /usr/local/bin/virtualenv
     owner: root
     group: wheel
+    mode: '0755'
     state: link
   tags:
     - requirements
