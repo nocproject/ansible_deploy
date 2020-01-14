@@ -60,7 +60,7 @@ tower_path: /usr/local/tower
 nsqd_reload_command: "service nsqd restart"
 nsqadmin_reload_command: "service nsqadmin restart"
 
-pip_cflags: "-O2 -pipe -fno-strict-aliasing -fstack-protector -I/usr/local/include"
+pip_cflags: "-O2 -pipe -fno-strict-aliasing -fstack-protector -Wno-return-type -I/usr/local/include"
 pip_ldflags: "-L/usr/local/lib"
 
 fake_shell: /sbin/nologin
