@@ -44,9 +44,13 @@
     name: "pip"
     virtualenv: "{{ noc_root }}"
 <<<<<<< HEAD
+<<<<<<< HEAD
     virtualenv_python: /usr/bin/python3
 =======
 >>>>>>> Try to add python3 choice
+=======
+    virtualenv_python: "/usr/bin/python3"
+>>>>>>> Move virtualenv to py3
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
@@ -61,7 +65,8 @@
     state: present
   environment:
     http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_
+    proxy }}"
   tags:
     - requirements
 
