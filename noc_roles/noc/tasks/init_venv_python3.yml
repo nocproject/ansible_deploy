@@ -65,8 +65,7 @@
     state: present
   environment:
     http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_
-    proxy }}"
+    https_proxy: "{{ http_proxy }}"
   tags:
     - requirements
 
