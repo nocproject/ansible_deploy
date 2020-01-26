@@ -4,6 +4,7 @@
     chdir: "{{ noc_root }}"
     name: "pip"
     virtualenv: "{{ noc_root }}"
+    virtualenv_python: "/usr/bin/python3"
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
@@ -18,7 +19,8 @@
     state: present
   environment:
     http_proxy: "{{ http_proxy }}"
-    https_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_
+    proxy }}"
   tags:
     - requirements
 
