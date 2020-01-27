@@ -2,9 +2,9 @@
 - name: Initialize virtualenv3
   pip:
     chdir: "{{ noc_root }}"
-    name: "pip3"
+    name: "pip"
     virtualenv: "{{ noc_root }}"
-    virtualenv_python: "/usr/bin/python3"
+    virtualenv_python: /usr/bin/python3
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
