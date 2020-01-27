@@ -45,8 +45,9 @@
 >>>>>>> Fix mistype
   pip:
     chdir: "{{ noc_root }}"
-    name: "pip3"
+    name: "pip"
     virtualenv: "{{ noc_root }}"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     virtualenv_python: /usr/bin/python3
@@ -55,6 +56,9 @@
 =======
     virtualenv_python: "/usr/bin/python3"
 >>>>>>> Move virtualenv to py3
+=======
+    virtualenv_python: /usr/bin/python3
+>>>>>>> Delete quotes
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
