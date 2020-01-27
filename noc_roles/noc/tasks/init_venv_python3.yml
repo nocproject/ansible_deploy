@@ -1,8 +1,8 @@
 ---
-- name: Initialize virtualenv
+- name: Initialize virtualenv3
   pip:
     chdir: "{{ noc_root }}"
-    name: "pip"
+    name: "pip3"
     virtualenv: "{{ noc_root }}"
     virtualenv_python: "/usr/bin/python3"
     state: "latest"
