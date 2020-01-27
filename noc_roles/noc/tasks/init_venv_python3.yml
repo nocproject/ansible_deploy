@@ -78,6 +78,7 @@
     - requirements
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 - name: Fix broken PIP versions
   command: "{{ noc_root }}/scripts/deploy/fix-pip"
@@ -89,6 +90,8 @@
     https_proxy: "{{ http_proxy }}"
 
 >>>>>>> Try to add python3 choice
+=======
+>>>>>>> Remove unused roles
 - name: Upgrade setuptools
   pip:
     name: setuptools
@@ -99,13 +102,6 @@
     https_proxy: "{{ http_proxy }}"
   tags:
     - requirements
-
-- name: Relink site-packages
-  command: "{{ noc_root }}/scripts/deploy/link-site-packages"
-  args:
-    chdir: "{{ noc_root }}"
-  register: s
-  changed_when: "'CHANGED' in s.stdout"
 
 - name: Install mercurial for freebsd
   pip:
