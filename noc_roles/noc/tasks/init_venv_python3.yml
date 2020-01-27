@@ -23,15 +23,6 @@
   tags:
     - requirements
 
-- name: Fix broken PIP versions
-  command: "{{ noc_root }}/scripts/deploy/fix-pip"
-  args:
-    chdir: "{{ noc_root }}"
-  register: result
-  changed_when: "'CHANGED' in result.stdout"
-  environment:
-    https_proxy: "{{ http_proxy }}"
-
 - name: Upgrade setuptools
   pip:
     name: setuptools
@@ -42,13 +33,6 @@
     https_proxy: "{{ http_proxy }}"
   tags:
     - requirements
-
-- name: Relink site-packages
-  command: "{{ noc_root }}/scripts/deploy/link-site-packages"
-  args:
-    chdir: "{{ noc_root }}"
-  register: s
-  changed_when: "'CHANGED' in s.stdout"
 
 - name: Install mercurial for freebsd
   pip:
