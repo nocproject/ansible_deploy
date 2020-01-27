@@ -1,5 +1,6 @@
 ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 - name: gather py3 facts
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -39,9 +40,12 @@
 =======
 - name: Initialize virtualenv
 >>>>>>> Try to add python3 choice
+=======
+- name: Initialize virtualenv3
+>>>>>>> Fix mistype
   pip:
     chdir: "{{ noc_root }}"
-    name: "pip"
+    name: "pip3"
     virtualenv: "{{ noc_root }}"
 <<<<<<< HEAD
 <<<<<<< HEAD
