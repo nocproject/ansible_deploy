@@ -140,6 +140,7 @@
 - name: Install noc.pth
   template:
 <<<<<<< HEAD
+<<<<<<< HEAD
     src: "lib/python/site-packages/noc.pth.j2"
 <<<<<<< HEAD
     dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
@@ -148,10 +149,14 @@
     src: "lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site-packages/noc.pth.j2"
 >>>>>>> Add python path vars
     dest: "{{ noc_root }}/lib/python/site-packages/noc.pth"
+=======
+    src: "lib/python/site-packages/noc.pth.j2"
+    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
+>>>>>>> Add python path vars fixed
 
 - name: Update site.py
   replace:
-    dest: "{{ noc_root }}/lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site.py"
+    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}./site.py"
     regexp: "encoding = ['\"]ascii['\"]"
     replace: "encoding = 'utf-8'"
   tags:
