@@ -1,4 +1,11 @@
 ---
+- name: gather py3 facts
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  setup:
+    gather_subset:
+      - 'min'
+
 - name: Initialize virtualenv3
   pip:
     chdir: "{{ noc_root }}"
@@ -64,19 +71,12 @@
 
 - name: Install noc.pth
   template:
-    src: "lib/python/site-packages/noc.pth.j2"
+    src: "lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site-packages/noc.pth.j2"
     dest: "{{ noc_root }}/lib/python/site-packages/noc.pth"
-
-- name: Install sitecustomize.py
-  template:
-    src: "lib/python/site-packages/sitecustomize.py.j2"
-    dest: "{{ noc_root }}/lib/python/site-packages/sitecustomize.py"
-  tags:
-    - config
 
 - name: Update site.py
   replace:
-    dest: "{{ noc_root }}/lib/python/site.py"
+    dest: "{{ noc_root }}/lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site.py"
     regexp: "encoding = ['\"]ascii['\"]"
     replace: "encoding = 'utf-8'"
   tags:
