@@ -1,6 +1,9 @@
 ---
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add python path vars
 - name: gather py3 facts
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -8,6 +11,7 @@
     gather_subset:
       - 'min'
 
+<<<<<<< HEAD
 - name: Check if we have NOC/bin/ folder with py2
   register: noc_bin_py2
   stat:
@@ -36,6 +40,8 @@
     - noc_bin_py2 is defined
     - noc_bin_py2.stat.exists
 
+=======
+>>>>>>> Add python path vars
 - name: Initialize virtualenv3
 =======
 - name: Initialize virtualenv
@@ -133,22 +139,19 @@
 
 - name: Install noc.pth
   template:
+<<<<<<< HEAD
     src: "lib/python/site-packages/noc.pth.j2"
 <<<<<<< HEAD
     dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
 =======
+=======
+    src: "lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site-packages/noc.pth.j2"
+>>>>>>> Add python path vars
     dest: "{{ noc_root }}/lib/python/site-packages/noc.pth"
-
-- name: Install sitecustomize.py
-  template:
-    src: "lib/python/site-packages/sitecustomize.py.j2"
-    dest: "{{ noc_root }}/lib/python/site-packages/sitecustomize.py"
-  tags:
-    - config
 
 - name: Update site.py
   replace:
-    dest: "{{ noc_root }}/lib/python/site.py"
+    dest: "{{ noc_root }}/lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site.py"
     regexp: "encoding = ['\"]ascii['\"]"
     replace: "encoding = 'utf-8'"
   tags:
