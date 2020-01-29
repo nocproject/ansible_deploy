@@ -152,6 +152,7 @@
 =======
     src: "lib/python/site-packages/noc.pth.j2"
     dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
+<<<<<<< HEAD
 >>>>>>> Add python path vars fixed
 
 - name: Update site.py
@@ -162,3 +163,5 @@
   tags:
     - config
 >>>>>>> Try to add python3 choice
+=======
+>>>>>>> Remove unused encode replacement
