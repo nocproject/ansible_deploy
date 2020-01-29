@@ -73,11 +73,3 @@
   template:
     src: "lib/python/site-packages/noc.pth.j2"
     dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
-
-- name: Update site.py
-  replace:
-    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site.py"
-    regexp: "encoding = ['\"]ascii['\"]"
-    replace: "encoding = 'utf-8'"
-  tags:
-    - config
