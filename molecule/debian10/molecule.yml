@@ -27,6 +27,8 @@ provisioner:
       force_color: 1
   env:
     ANSIBLE_ROLES_PATH: $PWD/additional_roles:$PWD/system_roles:$PWD/noc_roles
+    ANSIBLE_STRATEGY_PLUGINS: /usr/local/lib/python2.7/dist-packages/ansible_mitogen
+    ANSIBLE_STRATEGY: mitogen_linear
     TOWER_SHOW_SECRETS: "True"
     ANSIBLE_STDOUT_CALLBACK: debug
     ANSIBLE_CALLBACK_WHITELIST: timer,profile_tasks
