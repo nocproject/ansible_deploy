@@ -2,6 +2,7 @@
 - name: Install and configure mongo
   hosts: svc-mongod-exec
   become: "True"
+  strategy: mitogen_linear
   serial: 30%
   any_errors_fatal: "True"
   tags:

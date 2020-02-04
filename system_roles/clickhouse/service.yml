@@ -2,6 +2,7 @@
 - name: clickhouse tasks
   hosts: svc-clickhouse-exec
   become: "True"
+  strategy: mitogen_linear
   any_errors_fatal: "False"
   gather_facts: "True"
   tags:

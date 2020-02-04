@@ -3,6 +3,7 @@
   hosts: svc-nsqd-exec
   become: "True"
   any_errors_fatal: "True"
+  strategy: mitogen_linear
   tags:
     - nsq
     - nsqd

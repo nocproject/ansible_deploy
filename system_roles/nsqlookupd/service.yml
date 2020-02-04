@@ -2,6 +2,7 @@
 - name: Install and configure nsqlookupd
   hosts: svc-nsqlookupd-exec
   become: "True"
+  strategy: mitogen_linear
   any_errors_fatal: "True"
   tags:
     - nsq

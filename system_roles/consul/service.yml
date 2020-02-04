@@ -2,6 +2,7 @@
 - name: Consul tasks
   hosts: svc-consul-exec
   become: "True"
+  strategy: mitogen_linear
   any_errors_fatal: "False"
   serial: 50%
   gather_facts: "True"

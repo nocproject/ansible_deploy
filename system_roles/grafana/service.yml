@@ -2,6 +2,7 @@
 - name: Install and configure grafana
   hosts: svc-grafana-exec
   become: "True"
+  strategy: mitogen_linear
   serial: 50%
   any_errors_fatal: "True"
   tags:

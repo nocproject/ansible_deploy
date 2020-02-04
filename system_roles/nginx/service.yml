@@ -3,6 +3,7 @@
   hosts: svc-nginx-exec
   serial: 50%
   become: "True"
+  strategy: mitogen_linear
   tags:
     - nginx
     - web
