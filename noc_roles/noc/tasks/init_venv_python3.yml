@@ -6,6 +6,30 @@
     gather_subset:
       - 'min'
 
+- name: Check if we have NOC/bin/ folder with py2
+  register: noc_bin_py2
+  stat:
+    path: "{{ noc_root }}/bin/python2"
+
+- name: Archive old py2 noc folder and delete files in /var/lib
+  block:
+    - name: archive current noc dir
+      archive:
+        path: "{{noc_root}}"
+        dest: "{{noc_root}}/../noc_on_python2.tbz"
+        format: bz2
+
+    - name: Delete old folders
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - {{ noc_root }}
+        - /var/lib/noc/var/pkg
+  when:
+    - noc_bin_py2 is defined
+    - noc_bin_py2.stat.exists
+
 - name: Initialize virtualenv3
   pip:
     chdir: "{{ noc_root }}"
