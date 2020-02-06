@@ -18,6 +18,20 @@
       when:
         - noc_root == '' or noc_root is not defined
 
+    - block:
+        - name: check if thereis no native python3
+          stat:
+            path: /usr/bin/python3
+          register: noc_node_py3
+
+        - name: fail if no python3 is on host at `/usr/bin/python3 path`
+          fail:
+            msg: "no python3 is on host at `/usr/bin/python3 path`. Please install python3"
+          when:
+            - noc_python_interpreter == 'python3'
+            - noc_node_py3 is defined
+            - not noc_node_py3.stat.exists
+
     - name: check if noc_root exists
       stat:
         path: "{{ noc_root }}"
