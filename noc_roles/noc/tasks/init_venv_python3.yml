@@ -9,7 +9,7 @@
 - name: Check if we have NOC/bin/ folder with py2
   register: noc_bin_py2
   stat:
-    path: "{{ noc_root }}"/bin/python2
+    path: "{{ noc_root }}/bin/python2"
 
 - name: Archive old py2 noc folder and delete files in /var/lib
   block:
