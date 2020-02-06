@@ -34,6 +34,7 @@
         path: "{{ item }}"
       with_items:
 <<<<<<< HEAD
+<<<<<<< HEAD
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
 
@@ -42,6 +43,9 @@
 
 =======
         - {{ noc_root }}
+=======
+        - "{{ noc_root }}"
+>>>>>>> Fix key
         - /var/lib/noc/var/pkg
 >>>>>>> Add checks and cleaning of folders
   when:
