@@ -12,6 +12,9 @@
       - 'min'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Add checks and cleaning of folders
 - name: Check if we have NOC/bin/ folder with py2
   register: noc_bin_py2
   stat:
@@ -30,16 +33,22 @@
         state: absent
         path: "{{ item }}"
       with_items:
+<<<<<<< HEAD
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
 
     - name: Reinitialize git
       include_tasks: "git.yml"
 
+=======
+        - {{ noc_root }}
+        - /var/lib/noc/var/pkg
+>>>>>>> Add checks and cleaning of folders
   when:
     - noc_bin_py2 is defined
     - noc_bin_py2.stat.exists
 
+<<<<<<< HEAD
 =======
 >>>>>>> Add python path vars
 - name: Initialize virtualenv3
@@ -47,6 +56,8 @@
 - name: Initialize virtualenv
 >>>>>>> Try to add python3 choice
 =======
+=======
+>>>>>>> Add checks and cleaning of folders
 - name: Initialize virtualenv3
 >>>>>>> Fix mistype
   pip:
