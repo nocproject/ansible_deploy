@@ -163,4 +163,6 @@
   file:
     state: directory
     path: "{{ mongo_db_path }}"
+    owner: "{{ mongo_user }}"
+    group: "{{ mongo_user }}"
     mode: 0750
