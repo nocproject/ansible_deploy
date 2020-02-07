@@ -24,9 +24,19 @@ lint:
     - docker
     - cloud
 
+lint ansible2.8:
+  stage: lint
+  image: registry.getnoc.com/infrastructure/ansible_linter:ansible_2_8
+  script:
+    - ansible-playbook --version
+    - ansible-playbook */*/service.yml --syntax-check
+  tags:
+    - docker
+    - cloud
+
 .base_builder: &base_builder
   stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:ansible_2_8
+  image: registry.getnoc.com/infrastructure/molecule-docker:master
   before_script:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
