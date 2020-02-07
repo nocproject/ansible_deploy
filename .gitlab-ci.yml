@@ -28,6 +28,8 @@ lint ansible2.8:
   stage: lint
   image: registry.getnoc.com/infrastructure/ansible_linter:ansible_2_8
   script:
+    - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
+    - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
     - ansible-playbook --version
     - ansible-playbook */*/service.yml --syntax-check
   tags:
