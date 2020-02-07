@@ -41,6 +41,7 @@
     - name: Reinitialize git
       include_tasks: "git.yml"
 
+<<<<<<< HEAD
 =======
         - {{ noc_root }}
 =======
@@ -48,6 +49,8 @@
 >>>>>>> Fix key
         - /var/lib/noc/var/pkg
 >>>>>>> Add checks and cleaning of folders
+=======
+>>>>>>> Fix path
   when:
     - noc_bin_py2 is defined
     - noc_bin_py2.stat.exists
