@@ -164,4 +164,3 @@
     state: directory
     path: "{{ mongo_db_path }}"
     mode: 0750
-    recurse: "True"
