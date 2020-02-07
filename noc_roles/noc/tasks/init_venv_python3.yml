@@ -26,6 +26,10 @@
       with_items:
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
+
+    - name: Reinitialize git
+      include_tasks: "git.yml"
+
   when:
     - noc_bin_py2 is defined
     - noc_bin_py2.stat.exists
