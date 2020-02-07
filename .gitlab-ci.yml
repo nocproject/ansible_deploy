@@ -15,7 +15,7 @@ lint:
     - yamllint --version
     - yamllint -s .
     - ansible-playbook --version
-    - ansible-playbook */*/service.yml --syntax-check
+    - for inv in molecule/*/inv.yml; do ansible-playbook */*/service.yml --syntax-check -i $inv; done
     - ansible-lint --version
     #- ansible-lint */*/service.yml -v
     - ansible-review --version
