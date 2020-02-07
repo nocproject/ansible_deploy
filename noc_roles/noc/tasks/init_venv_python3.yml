@@ -127,6 +127,13 @@
   tags:
     - requirements
 
+- name: Relink site-packages
+  command: "{{ noc_root }}/scripts/deploy/link-site-packages"
+  args:
+    chdir: "{{ noc_root }}"
+  register: s
+  changed_when: "'CHANGED' in s.stdout"
+
 - name: Install mercurial for freebsd
   pip:
     chdir: "{{ noc_root }}"
