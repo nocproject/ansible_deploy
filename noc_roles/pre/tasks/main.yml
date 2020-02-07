@@ -21,11 +21,11 @@
     - always
 
 - block:
-  - name: "Include OS-specific tasks"
-    include_tasks: "os/{{ ansible_distribution }}/main.yml"
-    tags:
-      - config
-      - always
+    - name: "Include OS-specific tasks"
+      include_tasks: "os/{{ ansible_distribution }}/main.yml"
+      tags:
+        - config
+        - always
   become: "True"
 
 - name: notify deploy started
