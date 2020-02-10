@@ -11,10 +11,19 @@
     - config
   when: "'Linux' in ansible_system"
 
+- name: Register supervisord's version 1/2
+  slurp:
+    src: "{{ noc_root }}/requirements/node.txt"
+  register: node-req
+
+- name: Register supervisord's version 2/2
+    set_fact:
+      sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
+
 - name: patch supervisord for oomkiller
   patch:
     basedir: "{{ noc_root }}"
-    src: oom_score_adj.patch
+    src: "oom_score_adj_v{{ sup_ver }}.patch"
     strip: 1
   tags:
     - config
