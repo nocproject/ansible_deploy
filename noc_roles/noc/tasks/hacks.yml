@@ -35,10 +35,14 @@
 =======
   set_fact:
 <<<<<<< HEAD
+<<<<<<< HEAD
     sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 =======
     sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\d.\d.\d)$', '\\1') }}"
+>>>>>>> Add different supervisor's configs patch
+=======
+    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 
 - name: patch supervisord for oomkiller
