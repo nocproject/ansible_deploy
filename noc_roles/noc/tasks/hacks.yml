@@ -15,6 +15,7 @@
   slurp:
     src: "{{ noc_root }}/requirements/node.txt"
 <<<<<<< HEAD
+<<<<<<< HEAD
   register: node_req
   tags:
     - config
@@ -26,6 +27,9 @@
     - config
 =======
   register: node-req
+=======
+  register: node_req
+>>>>>>> Add different supervisor's configs patch
 
 - name: Register supervisord's version 2/2
 <<<<<<< HEAD
@@ -36,6 +40,7 @@
   set_fact:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 =======
@@ -43,6 +48,9 @@
 >>>>>>> Add different supervisor's configs patch
 =======
     sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
+>>>>>>> Add different supervisor's configs patch
+=======
+    sup_ver: "{{ node_req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 
 - name: patch supervisord for oomkiller
