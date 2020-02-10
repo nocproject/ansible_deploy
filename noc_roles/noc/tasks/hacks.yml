@@ -18,7 +18,7 @@
 
 - name: Register supervisord's version 2/2
   set_fact:
-    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\d.\d.\d)$', '\\1') }}"
+    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
 
 - name: patch supervisord for oomkiller
   patch:
