@@ -14,11 +14,11 @@
 - name: Register supervisord's version 1/2
   slurp:
     src: "{{ noc_root }}/requirements/node.txt"
-  register: node-req
+  register: node_req
 
 - name: Register supervisord's version 2/2
   set_fact:
-    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
+    sup_ver: "{{ node_req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
 
 - name: patch supervisord for oomkiller
   patch:
