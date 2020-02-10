@@ -14,6 +14,7 @@
 - name: Register supervisord's version 1/2
   slurp:
     src: "{{ noc_root }}/requirements/node.txt"
+<<<<<<< HEAD
   register: node_req
   tags:
     - config
@@ -23,11 +24,22 @@
     sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\1') | first }}"
   tags:
     - config
+=======
+  register: node-req
+
+- name: Register supervisord's version 2/2
+    set_fact:
+      sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
+>>>>>>> Add different supervisor's configs patch
 
 - name: patch supervisord for oomkiller
   patch:
     basedir: "{{ noc_root }}"
     src: "oom_score_adj_v{{ sup_ver }}.patch"
+<<<<<<< HEAD
+=======
+    strip: 1
+>>>>>>> Add different supervisor's configs patch
   tags:
     - config
   when:
