@@ -28,8 +28,13 @@
   register: node-req
 
 - name: Register supervisord's version 2/2
+<<<<<<< HEAD
     set_fact:
       sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
+>>>>>>> Add different supervisor's configs patch
+=======
+  set_fact:
+    sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 
 - name: patch supervisord for oomkiller
