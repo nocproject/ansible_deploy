@@ -23,6 +23,7 @@
 
 - name: Register supervisord's version 2/2
   set_fact:
+<<<<<<< HEAD
     sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\1') | first }}"
   tags:
     - config
@@ -65,6 +66,9 @@
 <<<<<<< HEAD
 >>>>>>> Add decode cause "should read docs", file's content in b64 by default
 =======
+=======
+    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') }}"
+>>>>>>> Final fix of supervisor's patch mechanism
   tags:
     - config
 >>>>>>> Final fix of supervisor's patch mechanism
