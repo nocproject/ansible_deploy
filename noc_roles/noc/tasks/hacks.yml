@@ -42,6 +42,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
 >>>>>>> Add different supervisor's configs patch
 =======
@@ -56,6 +57,9 @@
 =======
     sup_ver: "{{ node_req['content'] | regex_search('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
 >>>>>>> Fix regex
+=======
+    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
+>>>>>>> Add decode cause "should read docs", file's content in b64 by default
 
 - name: patch supervisord for oomkiller
   patch:
