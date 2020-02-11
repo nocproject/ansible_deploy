@@ -20,7 +20,7 @@
 
 - name: Register supervisord's version 2/2
   set_fact:
-    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
+    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') }}"
   tags:
     - config
 
