@@ -19,6 +19,7 @@
   register: node_req
   tags:
     - config
+<<<<<<< HEAD
 
 - name: Register supervisord's version 2/2
   set_fact:
@@ -30,6 +31,8 @@
 =======
   register: node_req
 >>>>>>> Add different supervisor's configs patch
+=======
+>>>>>>> Final fix of supervisor's patch mechanism
 
 - name: Register supervisord's version 2/2
 <<<<<<< HEAD
@@ -59,7 +62,12 @@
 >>>>>>> Fix regex
 =======
     sup_ver: "{{ node_req['content'] | b64decode | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
+<<<<<<< HEAD
 >>>>>>> Add decode cause "should read docs", file's content in b64 by default
+=======
+  tags:
+    - config
+>>>>>>> Final fix of supervisor's patch mechanism
 
 - name: patch supervisord for oomkiller
   patch:
