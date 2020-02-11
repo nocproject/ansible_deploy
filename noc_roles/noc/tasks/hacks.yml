@@ -25,6 +25,7 @@
   set_fact:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\1') | first }}"
   tags:
     - config
@@ -72,6 +73,9 @@
 >>>>>>> Final fix of supervisor's patch mechanism
 =======
     sup_ver: "{{ node_req['content'] | b64decode | regex_replace('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') | first }}"
+>>>>>>> Final fix of supervisor's patch mechanism
+=======
+    sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') | first }}"
 >>>>>>> Final fix of supervisor's patch mechanism
   tags:
     - config
