@@ -90,9 +90,12 @@
     basedir: "{{ noc_root }}"
     src: "oom_score_adj_v{{ sup_ver }}.patch"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     strip: 1
 >>>>>>> Add different supervisor's configs patch
+=======
+>>>>>>> remove strip
   tags:
     - config
   when:
