@@ -74,6 +74,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     virtualenv_python: /usr/bin/python3
 =======
 >>>>>>> Try to add python3 choice
@@ -83,6 +84,9 @@
 =======
     virtualenv_python: /usr/bin/python3
 >>>>>>> Delete quotes
+=======
+    virtualenv_command: /usr/bin/python3 -m venv
+>>>>>>> Remove mdiff install
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
