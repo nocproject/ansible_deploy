@@ -1,9 +1,4 @@
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Add python path vars
 - name: gather py3 facts
   vars:
     ansible_python_interpreter: /usr/bin/python3
@@ -11,10 +6,6 @@
     gather_subset:
       - 'min'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Add checks and cleaning of folders
 - name: Check if we have NOC/bin/ folder with py2
   register: noc_bin_py2
   stat:
@@ -33,60 +24,22 @@
         state: absent
         path: "{{ item }}"
       with_items:
-<<<<<<< HEAD
-<<<<<<< HEAD
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
 
     - name: Reinitialize git
       include_tasks: "git.yml"
 
-<<<<<<< HEAD
-=======
-        - {{ noc_root }}
-=======
-        - "{{ noc_root }}"
->>>>>>> Fix key
-        - /var/lib/noc/var/pkg
->>>>>>> Add checks and cleaning of folders
-=======
->>>>>>> Fix path
   when:
     - noc_bin_py2 is defined
     - noc_bin_py2.stat.exists
 
-<<<<<<< HEAD
-=======
->>>>>>> Add python path vars
 - name: Initialize virtualenv3
-=======
-- name: Initialize virtualenv
->>>>>>> Try to add python3 choice
-=======
-=======
->>>>>>> Add checks and cleaning of folders
-- name: Initialize virtualenv3
->>>>>>> Fix mistype
   pip:
     chdir: "{{ noc_root }}"
     name: "pip"
     virtualenv: "{{ noc_root }}"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    virtualenv_python: /usr/bin/python3
-=======
->>>>>>> Try to add python3 choice
-=======
-    virtualenv_python: "/usr/bin/python3"
->>>>>>> Move virtualenv to py3
-=======
-    virtualenv_python: /usr/bin/python3
->>>>>>> Delete quotes
-=======
     virtualenv_command: /usr/bin/python3 -m venv
->>>>>>> Remove mdiff install
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"
@@ -105,21 +58,6 @@
   tags:
     - requirements
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-- name: Fix broken PIP versions
-  command: "{{ noc_root }}/scripts/deploy/fix-pip"
-  args:
-    chdir: "{{ noc_root }}"
-  register: result
-  changed_when: "'CHANGED' in result.stdout"
-  environment:
-    https_proxy: "{{ http_proxy }}"
-
->>>>>>> Try to add python3 choice
-=======
->>>>>>> Remove unused roles
 - name: Upgrade setuptools
   pip:
     name: setuptools
@@ -155,29 +93,5 @@
 
 - name: Install noc.pth
   template:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    src: "lib/python/site-packages/noc.pth.j2"
-<<<<<<< HEAD
-    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
-=======
-=======
-    src: "lib/python{{ ansible_distribution_major_version }}.{{ ansible_python.version.major }}/site-packages/noc.pth.j2"
->>>>>>> Add python path vars
-    dest: "{{ noc_root }}/lib/python/site-packages/noc.pth"
-=======
     src: "lib/python/site-packages/noc.pth.j2"
     dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
-<<<<<<< HEAD
->>>>>>> Add python path vars fixed
-
-- name: Update site.py
-  replace:
-    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site.py"
-    regexp: "encoding = ['\"]ascii['\"]"
-    replace: "encoding = 'utf-8'"
-  tags:
-    - config
->>>>>>> Try to add python3 choice
-=======
->>>>>>> Remove unused encode replacement

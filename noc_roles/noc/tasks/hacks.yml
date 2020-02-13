@@ -14,88 +14,20 @@
 - name: Register supervisord's version 1/2
   slurp:
     src: "{{ noc_root }}/requirements/node.txt"
-<<<<<<< HEAD
-<<<<<<< HEAD
   register: node_req
   tags:
     - config
-<<<<<<< HEAD
 
 - name: Register supervisord's version 2/2
   set_fact:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\1') | first }}"
   tags:
     - config
-=======
-  register: node-req
-=======
-  register: node_req
->>>>>>> Add different supervisor's configs patch
-=======
->>>>>>> Final fix of supervisor's patch mechanism
-
-- name: Register supervisord's version 2/2
-<<<<<<< HEAD
-    set_fact:
-      sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
->>>>>>> Add different supervisor's configs patch
-=======
-  set_fact:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    sup_ver: "{{ node-req['content'] | regex_search('^supervisor==(\d.\d.\d)$', '\\1') }}"
->>>>>>> Add different supervisor's configs patch
-=======
-    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\d.\d.\d)$', '\\1') }}"
->>>>>>> Add different supervisor's configs patch
-=======
-    sup_ver: "{{ node-req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
->>>>>>> Add different supervisor's configs patch
-=======
-    sup_ver: "{{ node_req['content'] | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
->>>>>>> Add different supervisor's configs patch
-=======
-    sup_ver: "{{ node_req['content'] | regex_search('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
->>>>>>> Fix regex
-=======
-    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('^supervisor==(\\d.\\d.\\d)$', '\\\\1') }}"
-<<<<<<< HEAD
->>>>>>> Add decode cause "should read docs", file's content in b64 by default
-=======
-=======
-    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') }}"
->>>>>>> Final fix of supervisor's patch mechanism
-=======
-    sup_ver: "{{ node_req['content'] | b64decode | regex_replace('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') | first }}"
->>>>>>> Final fix of supervisor's patch mechanism
-=======
-    sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\\\1') | first }}"
->>>>>>> Final fix of supervisor's patch mechanism
-=======
-    sup_ver: "{{ node_req['content'] | b64decode | regex_search('supervisor==(\\d+.\\d+.\\d+)', '\\1') | first }}"
->>>>>>> Final fix of supervisor's patch mechanism
-  tags:
-    - config
->>>>>>> Final fix of supervisor's patch mechanism
 
 - name: patch supervisord for oomkiller
   patch:
     basedir: "{{ noc_root }}"
     src: "oom_score_adj_v{{ sup_ver }}.patch"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    strip: 1
->>>>>>> Add different supervisor's configs patch
-=======
->>>>>>> remove strip
   tags:
     - config
   when:
