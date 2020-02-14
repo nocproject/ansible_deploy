@@ -40,4 +40,4 @@
   # pg_ctl: could not read file "/usr/local/pgsql/data/postmaster.opts"
   command: service postgresql start
   args:
-    creates: '{{ postgres_home }}/data{{ postgres_version|replace(".","") }}/postmaster.opts'
+    creates: '{{ postgres_data_dir }}/postmaster.opts'
