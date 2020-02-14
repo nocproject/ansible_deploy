@@ -1,6 +1,8 @@
 ---
 - name: Install Grafana
-  pkgng: name="grafana5" state=present
+  pkgng:
+    name: "grafana5"
+    state: present
   register: freebsd_pkg_result
   retries: 4
   delay: 2
