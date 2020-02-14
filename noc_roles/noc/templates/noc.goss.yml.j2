@@ -70,12 +70,6 @@ file:
     linked-to: python
     filetype: symlink
     contains: []
-  {{ noc_root }}/bin/python -c 'import sys;print sys.getdefaultencoding()':
-    exit-status: 0
-    stdout:
-    - utf-8
-    stderr: []
-    timeout: 10000
 {% endif %}
   {{ noc_etc }}/activator.conf:
     exists: false
@@ -157,6 +151,14 @@ command:
     - '!/\\sM/'
     stderr: []
     timeout: 10000
+{% if noc_python_interpreter != "python3" %}
+  {{ noc_root }}/bin/python -c 'import sys;print sys.getdefaultencoding()':
+    exit-status: 0
+    stdout:
+    - utf-8
+    stderr: []
+    timeout: 10000
+{% endif %}
 {#  consul catalog nodes -service=nsqd -near=_agent|sed -n 2p|cut -f1 -d " ":#}
 {#    exit-status: 0#}
 {#    stdout:#}
