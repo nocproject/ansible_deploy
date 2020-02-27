@@ -38,9 +38,9 @@ provisioner:
     DIFF_ALWAYS: "True"
   playbooks:
     create: ../yc/create.yml
-    prepare: ../yc/prepare.yml
+    prepare: prepare.yml
     converge: ../yc/playbook.yml
-    verify: ../common/verify.yml
+    verify: verify.yml
     side_effect: ../common/cache.yml
     destroy: ../yc/destroy.yml
   options:
