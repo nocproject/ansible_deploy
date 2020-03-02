@@ -113,7 +113,7 @@ build_freebsd:
     SCENARIO_NAME: freebsd
     USE_CACHE: "False"  # freebsd minio-client "broken"
   tags:
-    - cloud
+    - satel
     - docker
   <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
