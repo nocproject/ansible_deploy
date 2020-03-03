@@ -9,6 +9,7 @@
       file:
         path: "../yc/{{ item.distr }}"
         state: directory
+      with_items: "{{ molecule_yml.platforms }}"
 
     - name: Generate terraform file
       template:
