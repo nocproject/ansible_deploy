@@ -8,8 +8,8 @@
     #      set_fact:
     #        use_cache: "{{ lookup('env','USE_CACHE') or True | bool }}"
 
-    - name: "Wait for any possibly running unattended upgrade to finish"
-      raw: "systemd-run --property=\"After=apt-daily.service apt-daily-upgrade.service\" --wait /bin/true"
+    - name: "Stop unattended upgrade"
+      raw: "systemctl stop unattended-upgrades.service"
       changed_when: false
       when: molecule_yml.platforms[0].distr is match("ubuntu.*")
 
