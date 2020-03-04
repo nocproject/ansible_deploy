@@ -11,12 +11,12 @@
     - name: "Stop unattended upgrade"
       raw: "systemctl stop unattended-upgrades.service"
       changed_when: false
-      when: molecule_yml.platforms[0].distr is match("ubuntu16")
+      when: molecule_yml.platforms[0].distr is match("ubuntu.*")
 
     - name: Wait 10sec for upgrade
       raw: "sleep 10"
       changed_when: false
-      when: molecule_yml.platforms[0].distr is match("ubuntu16")
+      when: molecule_yml.platforms[0].distr is match("ubuntu.*")
 
     - name: Check if not python2 on host
       raw: test -e /usr/bin/python || (apt -qy update && apt install -y python-minimal)
