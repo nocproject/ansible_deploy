@@ -15,7 +15,7 @@
     - requirements
 
 - name: create grafana users
-  import_role:
+  include_role:
     name: postgres
     tasks_from: users
   vars:
