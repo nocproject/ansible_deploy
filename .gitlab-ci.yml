@@ -22,21 +22,8 @@ lint:
     - git ls-files | grep -v molecule/ | xargs -P 32 -n 4 ansible-review -c .ansible-review -q
   tags:
     - docker
-    - cloud
 
-lint ansible2.8:
-  stage: lint
-  image: registry.getnoc.com/infrastructure/ansible_linter:ansible_2_8
-  script:
-    - export ANSIBLE_ROLES_PATH=./additional_roles:./system_roles:./noc_roles
-    - export ANSIBLE_LIBRARY=./library:./system_roles/mongod/library
-    - ansible-playbook --version
-    - ansible-playbook */*/service.yml --syntax-check
-  tags:
-    - docker
-    - cloud
-
-.base_builder: &base_builder
+.base_builder:
   stage: build
   image: registry.getnoc.com/infrastructure/molecule-docker:master
   before_script:
@@ -52,79 +39,71 @@ lint ansible2.8:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     paths:
       - /tmp/dist
+  variables:
+    PIP_CACHE: /root/.cache/pip
+    PKG_CACHE: /var/cache/apt/archives
   only:
     - branches@noc/ansible_deploy
     - master@noc/ansible_deploy
 
 build_centos:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
     SCENARIO_NAME: default
   tags:
     - cloud
     - docker
-  <<: *base_builder
 
 build_debian9:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: debian9
   tags:
     - cloud
     - docker
-  <<: *base_builder
 
 build_debian10:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: debian10
   tags:
     - cloud
     - docker
-  <<: *base_builder
 
 build_ubuntu16:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: ubuntu16
   tags:
     - cloud
     - docker
-  <<: *base_builder
 
 build_ubuntu18:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
-    PKG_CACHE: /var/cache/apt/archives
     SCENARIO_NAME: ubuntu18
   tags:
     - cloud
     - docker
-  <<: *base_builder
 
 build_freebsd:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/pkg
     SCENARIO_NAME: freebsd
     USE_CACHE: "False"  # freebsd minio-client "broken"
   tags:
     - satel
     - docker
-  <<: *base_builder
   allow_failure: true  # to hard to maintain without maintainer. often incompatible changes
 
 build_oel7:
+  extends: .base_builder
   variables:
-    PIP_CACHE: /root/.cache/pip
     PKG_CACHE: /var/cache/yum
     SCENARIO_NAME: oel7
   tags:
     - satel
     - docker
-  <<: *base_builder
   allow_failure: true  # no active users for platform
