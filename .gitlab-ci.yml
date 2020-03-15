@@ -55,7 +55,6 @@ build_centos:
     - cloud
     - docker
 
-
 build_debian9:
   extends: .base_builder
   variables:
@@ -71,7 +70,6 @@ build_debian10:
   tags:
     - cloud
     - docker
-
 
 build_ubuntu16:
   extends: .base_builder
