@@ -1,4 +1,13 @@
 ---
+- name: add clickhouse group
+  group:
+    name: clickhouse
+
+- name: add clickhouse user
+  user:
+    name: clickhouse
+    shell: "{{ fake_shell }}"
+
 - name: Create ch directories
   file:
     path: "{{ item }}"
