@@ -1,4 +1,13 @@
 ---
+- name: Create ch directories
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    mode: 0755
+    group: clickhouse
+    owner: clickhouse
+  with_items:
+    - "{{ ch_dictionaries_path }}"
 
 - name: "Include OS-specific tasks"
   include_tasks: "os/{{ ansible_distribution }}/main.yml"
