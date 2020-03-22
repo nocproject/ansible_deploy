@@ -53,18 +53,15 @@
   vars:
     packages:
       - git
-      - patch
       - python-virtualenv
       - gcc
       - postgresql{{ postgres_version|replace(".","") }}
-      - postgresql-devel
       - postgresql{{ postgres_version|replace(".","") }}-devel
+      - patch
       - libffi
       - libffi-devel
       - libmemcached
-      - libmemcached-devel
       - zlib-devel
-      - jemalloc
       - bzip2
   environment:
     https_proxy: "{{ http_proxy }}"
