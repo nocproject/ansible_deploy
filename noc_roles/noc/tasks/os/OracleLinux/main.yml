@@ -45,7 +45,7 @@
   tags:
     - requirements
 
-- name: Install OEL system packages
+- name: Install OEL system packages 2/2
   yum:
     name: "{{ packages }}"
     state: present
@@ -53,11 +53,11 @@
   vars:
     packages:
       - git
+      - patch
       - python-virtualenv
       - gcc
       - postgresql{{ postgres_version|replace(".","") }}
       - postgresql{{ postgres_version|replace(".","") }}-devel
-      - patch
       - libffi
       - libffi-devel
       - libmemcached
@@ -68,6 +68,17 @@
     http_proxy: "{{ http_proxy }}"
   tags:
     - requirements
+
+- name: Install OEL system packages 2/2
+  yum:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - jemalloc
+  environment:
+    http_proxy: "{{ http_proxy }}"
+    https_proxy: "{{ http_proxy }}"
 
 - name: Install OEL system packages for python3
   yum:
