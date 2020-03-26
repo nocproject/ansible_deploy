@@ -14,6 +14,8 @@ resource "yandex_compute_instance" "vm-1" {
     core_fraction = 100
   }
 
+  platform_id = "standard-v2"
+
   scheduling_policy {
     preemptible = true
   }
@@ -34,8 +36,6 @@ resource "yandex_compute_instance" "vm-1" {
     ssh-keys = "{{ item.ssh_user }}:${file("{{ molecule_yml.driver.ssh_identity_file_pub }}")}",
     serial-port-enable = 1  }
 }
-
-  platform_id = "standard-v2"
 
 output "internal_ip_address_vm_1" {
   value = yandex_compute_instance.vm-1.network_interface[0].ip_address
