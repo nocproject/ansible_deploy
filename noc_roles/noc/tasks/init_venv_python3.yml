@@ -19,13 +19,20 @@
         dest: "{{noc_root}}/../noc_on_python2.tbz"
         format: bz2
 
-    - name: Delete old folders
-      file:
-        state: absent
-        path: "{{ item }}"
-      with_items:
-        - "{{ noc_root }}/*"
-        - /var/lib/noc/var/pkg
+  - name: Count files to delete from noc_root
+    find:
+      paths: "{{ noc_root }}"
+      patterns: "*"
+      excludes: 'etc/settings.yml'
+    register: files_to_delete
+
+  - name: Deleting files from noc_root
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items:
+      - "{{ files_to_delete.files }}"
+      - /var/lib/noc/var/pkg
 
     - name: Reinitialize git
       include_tasks: "git.yml"
