@@ -1,5 +1,5 @@
 ---
-- name: check if .git inside noc_root exists
+- name: check if noc_root exists
   stat:
     path: "{{ noc_root }}"
   register: noc_root_state

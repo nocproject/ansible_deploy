@@ -40,9 +40,20 @@
         - /var/lib/noc/var/pkg
       when: noc_root not in ansible_mounts|json_query('[].mount')
 
-    - name: Empty noc_root dir if its a mount
-      command:
-        cmd: "rm -rf {{ noc_root }}/*"
+    - name: create temporary empty folder
+      tempfile:
+        state: directory
+        suffix: tempansible
+      register: tempfile_1
+      when: noc_root in ansible_mounts|json_query('[].mount')
+
+    - name: Empty noc_root directory
+      synchronize:
+        src: tempfile_1.path
+        dest: "{{ noc_root }}"
+        delete: yes
+        recursive: yes
+      when: noc_root in ansible_mounts|json_query('[].mount')
 
     - name: Reinitialize git
       include_tasks: "git.yml"
