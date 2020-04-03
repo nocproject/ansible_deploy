@@ -19,6 +19,17 @@
         dest: "{{noc_root}}/../noc_on_python2.tbz"
         format: bz2
 
+    - name: check if we have custom settings.yml
+      stat:
+        path: "{{ noc_root }}/etc/settings.yml"
+      register: stat_result
+
+    - name: Copy settings.yml to /tmp
+      copy:
+        src: "{{ noc_root }}/etc/settings.yml"
+        dest: /tmp
+      when: stat_result.exists
+
     - name: Delete old folders
       file:
         state: absent
@@ -26,9 +37,20 @@
       with_items:
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
+      when: noc_root not in ansible_mounts.mount
+
+    - name: Empty noc_root dir if its a mount
+      command:
+        cmd: "rm -rf {{ noc_root }}/*"
 
     - name: Reinitialize git
       include_tasks: "git.yml"
+
+    - name: Copy settings.yml back
+      copy:
+        src: /tmp/settings.yml
+        dest: "{{ noc_root }}/etc/settings.yml"
+      when: stat_result.exists
 
   when:
     - noc_bin_py2 is defined
