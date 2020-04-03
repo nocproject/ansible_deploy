@@ -38,7 +38,7 @@
       with_items:
         - "{{ noc_root }}"
         - /var/lib/noc/var/pkg
-      when: noc_root not in ansible_mounts.mount
+      when: noc_root not in ansible_mounts|json_query('[].mount')
 
     - name: Empty noc_root dir if its a mount
       command:
