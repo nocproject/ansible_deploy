@@ -30,7 +30,6 @@
         dest: /tmp
         remote_src: true
       when: stat_result.stat.exists
-      remote_src: true
 
     - name: Delete old folders
       file:
