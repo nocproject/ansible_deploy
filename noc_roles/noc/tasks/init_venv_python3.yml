@@ -28,6 +28,7 @@
       copy:
         src: "{{ noc_root }}/etc/settings.yml"
         dest: /tmp
+        remote_src: true
       when: stat_result.stat.exists
       remote_src: true
 
@@ -51,8 +52,9 @@
       copy:
         src: /tmp/settings.yml
         dest: "{{ noc_root }}/etc/settings.yml"
+        remote_src: true
       when: stat_result.stat.exists
-      remote_src: true
+
 
   when:
     - noc_bin_py2 is defined
