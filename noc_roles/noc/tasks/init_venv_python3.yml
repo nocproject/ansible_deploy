@@ -53,8 +53,8 @@
       synchronize:
         src: "{{ tempfile_1.path }}/"
         dest: "{{ item }}"
-        delete: yes
-        recursive: yes
+        delete: true
+        recursive: true
       when: noc_root in ansible_mounts|json_query('[].mount')
       delegate_to: "{{ inventory_hostname }}"
       with_items:
