@@ -52,11 +52,14 @@
     - name: Empty noc_root directory
       synchronize:
         src: "{{ tempfile_1.path }}/"
-        dest: "{{ noc_root }}/"
+        dest: "{{ item }}"
         delete: yes
         recursive: yes
       when: noc_root in ansible_mounts|json_query('[].mount')
       delegate_to: "{{ inventory_hostname }}"
+      with_items:
+        - /var/lib/noc/var/pkg
+        - "{{ noc_root }}/"
 
     - name: Reinitialize git
       include_tasks: "git.yml"
