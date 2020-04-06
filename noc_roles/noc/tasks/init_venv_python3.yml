@@ -58,11 +58,11 @@
       when: noc_root in ansible_mounts|json_query('[].mount')
       delegate_to: "{{ inventory_hostname }}"
 
-    - name: Recreate noc dirs
-      include_tasks: "dirs.yml"
-
     - name: Reinitialize git
       include_tasks: "git.yml"
+
+    - name: Recreate noc dirs
+      include_tasks: "dirs.yml"
 
     - name: Copy settings.yml back
       copy:
