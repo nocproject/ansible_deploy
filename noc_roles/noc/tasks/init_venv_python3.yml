@@ -41,7 +41,7 @@
         - /var/lib/noc/var/pkg
       when: noc_root not in ansible_mounts|json_query('[].mount')
 
-    - name:  Handle if /opt/noc/ is mountpoint
+    - name: Handle if /opt/noc/ is mountpoint
       block:
         - name: Create temporary empty folder
           tempfile:
