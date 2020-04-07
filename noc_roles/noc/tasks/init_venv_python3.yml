@@ -41,25 +41,29 @@
         - /var/lib/noc/var/pkg
       when: noc_root not in ansible_mounts|json_query('[].mount')
 
-    - name: create temporary empty folder
-      tempfile:
-        state: directory
-        suffix: tempansible
-      register: tempfile_1
-      when: noc_root in ansible_mounts|json_query('[].mount')
-      delegate_to: "{{ inventory_hostname }}"
+    - name:  Handle if /opt/noc/ is mountpoint
+      block:
+        - name: Create temporary empty folder
+          tempfile:
+            state: directory
+            suffix: tempansible
+          register: tempfile_1
+          delegate_to: "{{ inventory_hostname }}"
 
-    - name: Empty noc_root directory
-      synchronize:
-        src: "{{ tempfile_1.path }}/"
-        dest: "{{ item }}"
-        delete: true
-        recursive: true
+        - name: Empty noc_root directory
+          synchronize:
+            src: "{{ tempfile_1.path }}/"
+            dest: "{{ item }}"
+            delete: true
+            recursive: true
+            perms: true
+            owner: true
+          delegate_to: "{{ inventory_hostname }}"
+          with_items:
+            - /var/lib/noc/var/pkg
+            - "{{ noc_root }}/"
+
       when: noc_root in ansible_mounts|json_query('[].mount')
-      delegate_to: "{{ inventory_hostname }}"
-      with_items:
-        - /var/lib/noc/var/pkg
-        - "{{ noc_root }}/"
 
     - name: Reinitialize git
       include_tasks: "git.yml"
