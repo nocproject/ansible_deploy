@@ -33,6 +33,11 @@
   tags:
     - requirements
 
+- name: Set installation language
+  set_fact:
+    language: "{{ web_language }}"
+    language_code: "{{ web_language }}"
+
 - name: "Install NOC theme"
   command: "{{ noc_root }}/scripts/deploy/install-packages requirements/theme-noc.json"
   args:
