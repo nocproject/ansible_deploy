@@ -63,6 +63,13 @@
             - /var/lib/noc/var/pkg
             - "{{ noc_root }}/"
 
+        - name: Fix permissions on noc dir
+          file:
+            path: "{{ noc_root }}"
+            owner: root
+            group: root
+            mode: '0755'
+
       when: noc_root in ansible_mounts|json_query('[].mount')
 
     - name: Reinitialize git
