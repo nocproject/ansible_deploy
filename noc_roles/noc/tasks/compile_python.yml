@@ -1,0 +1,49 @@
+---
+- name: "Python{{ noc_py3_version }} | Check that {{ noc_py3_version }} is still not installed"
+  stat:
+    path: "{{ /opt/python{{ noc_py3_version }}/bin/python{{ noc_py3_version }} }}"
+  register: already_installed
+  ignore_errors: True
+
+- name: Create dir for compiling
+  file:
+    path: "/opt/python{{ noc_py3_version }}"
+    state: directory
+  when: not already_installed.stat.exists
+
+- name: "Python{{ noc_py3_version }} | Download"
+  get_url:
+    url: "https://www.python.org/ftp/python/{{ python3.8_ver }}/Python-{{ python3.8_ver }}.tar.xz"
+    dest: "/opt/python{{ noc_py3_version }}"
+    checksum: "md5:{{ py_data.md5 }}"
+  environment:
+    https_proxy: "{{ http_proxy }}"
+    http_proxy: "{{ http_proxy }}"
+  when: should_install and not already_installed.stat.exists
+
+- name: "Python{{ noc_py3_version }} | Uncompress"
+  unarchive:
+    src={{ py_data.tar_file }}
+    dest=/tmp
+    copy=no
+    creates="{{ py_data.sources }}"
+  when: should_install and not already_installed.stat.exists
+
+- name: "Python{{ noc_py3_version }} | Compile and install"
+  command: "{{ item }}"
+  args:
+    chdir: "{{ py_data.sources }}"
+  with_items:
+    - "./configure --enable-optimizations --prefix {{ /opt/python{{ noc_py3_version }} }}"
+    - make
+    - make install
+  when: should_install and not already_installed.stat.exists
+
+- name: "Python{{ noc_py3_version }} | Create python_major_version symlink"
+  file:
+    src={{ py_data.install }}
+    dest='{{ base_install_folder }}/python{{ py_data.major_version }}'
+    state=link
+  when: should_install and not already_installed.stat.exists
+
+set noc_init_python_path
