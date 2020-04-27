@@ -117,7 +117,7 @@
     chdir: "{{ noc_root }}"
     name: "pip"
     virtualenv: "{{ noc_root }}"
-    virtualenv_command: "{{ noc_init_python_path }}" -m venv
+    virtualenv_command: "{{ noc_init_python_path }} -m venv"
     state: "latest"
   environment:
     https_proxy: "{{ http_proxy }}"

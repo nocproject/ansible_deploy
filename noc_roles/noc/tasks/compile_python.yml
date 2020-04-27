@@ -3,7 +3,7 @@
   stat:
     path: "{{ /opt/python{{ noc_py3_version }}/bin/python{{ noc_py3_version }} }}"
   register: already_installed
-  ignore_errors: True
+  ignore_errors: true
 
 - name: Create dir for compiling
   file:
@@ -46,4 +46,4 @@
     state=link
   when: should_install and not already_installed.stat.exists
 
-set noc_init_python_path
+#set noc_init_python_path
