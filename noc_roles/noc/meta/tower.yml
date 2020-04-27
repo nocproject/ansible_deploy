@@ -49,6 +49,7 @@ forms:
         - pypy
         - python3
     py3_version:
+      label: Python3 version
       default: "3.6"
       type: list
       description: Choose recommended version for your code version. Read https://getnoc.com/blog/
