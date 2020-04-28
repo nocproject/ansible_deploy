@@ -1,7 +1,7 @@
 ---
 - name: "Python{{ noc_py3_ver }} | Check that {{ noc_py3_ver }} is still not installed"
   stat:
-    path: "{{ /opt/python{{ noc_py3_ver }}/bin/python{{ noc_py3_ver }} }}"
+    path: "/opt/python{{ noc_py3_ver }}/bin/python{{ noc_py3_ver }}"
   register: already_installed
   ignore_errors: true
 
