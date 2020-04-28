@@ -48,7 +48,7 @@ forms:
         - python
         - pypy
         - python3
-    py3_version:
+    py3_ver:
       label: Python3 version
       default: "3.6"
       type: list

@@ -10,6 +10,7 @@ noc_etc: "{{ noc_root }}/etc"
 noc_reports_dir: "{{ noc_var_lib }}/reports"
 noc_crashinfo_dir: "{{ noc_var_lib }}/var/cp/crashinfo/new"
 noc_services_file: "{{ noc_etc }}/noc_services.conf"
+noc_py3_ver: "3.6"
 pypy_version: 5.9
 pypy_hash_sha256: 8d39eb98df3adf7882a7f3551f47b8c7cff47a0e20d6aabc57bb592f155c2616
 pypy_download_url_base: https://bitbucket.org/squeaky/portable-pypy/downloads
@@ -22,40 +23,12 @@ supervisorctl_key: "{{ lookup('supervisorctl_key', tower_data + '/noc/supervisor
 django_key: "{{ lookup('django_key', tower_data + '/noc/secret.key') }}"
 supervisor_sock_path: /var/run/supervisor_noc.sock
 
-python3.6_ver: 3.6.10
-python3.7_ver: 3.7.7
-python3.8_ver: 3.8.2
+py_version:
+  py3.6: "3.6.10"
+  py3.7: "3.7.7"
+  py3.8: "3.8.2"
 
-python3_ver: "{{ python{{ noc_py3_version }}_ver }}"
-
-python_url: https://www.python.org/ftp/python/{{ python3.8_ver }}/Python-{{ python3.8_ver }}.tar.xz
-
-versions:
-  py36: "3.6.10"
-  py37: "3.7.6"
-  py38: "3.8.1"
-
-hashes:
-  py36: "986078f11b39074be22a199e56491d98"
-  py37: "c08fbee72ad5c2c95b0f4e44bf6fd72c"
-  py38: "b3fb85fd479c0bf950c626ef80cacb57"
-
-py36:
-  version: "{{ versions.py36 }}"
-  major_version: "3.6"
-  url: "https://www.python.org/ftp/python/{{ versions.py36 }}/Python-{{ versions.py36 }}.tar.xz"
-  md5: "{{ hashes.py36 }}"
-  tar_file: "/tmp/py{{ versions.py36 }}.tar.xz"
-  sources: "/tmp/Python-{{ versions.py36 }}"
-  install: "{{ base_install_folder }}/python{{ versions.py36 }}"
-  bin: "{{ base_install_folder }}/python{{ versions.py36 }}/bin/python3.6"
-
-py37:
-  version: "{{ versions.py37 }}"
-  major_version: "3.7"
-  url: "https://www.python.org/ftp/python/{{ versions.py37 }}/Python-{{ versions.py37 }}.tar.xz"
-  md5: "{{ hashes.py37 }}"
-  tar_file: "/tmp/py{{ versions.py37 }}.tar.xz"
-  sources: "/tmp/Python-{{ versions.py37 }}"
-  install: "{{ base_install_folder }}/python{{ versions.py37 }}"
-  bin: "{{ base_install_folder }}/python{{ versions.py37 }}/bin/python3.7"
+py_hashes:
+  py3.6: "986078f11b39074be22a199e56491d98"
+  py3.7: "172c650156f7bea68ce31b2fd01fa766"
+  py3.8: "e9d6ebc92183a177b8e8a58cad5b8d67"

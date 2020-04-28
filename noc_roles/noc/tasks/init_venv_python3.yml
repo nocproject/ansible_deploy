@@ -9,7 +9,7 @@
 - name: Check if we have NOC/bin/ folder with py3
   register: noc_bin_py3
   stat:
-    path: "{{ noc_root }}/bin/python{{ noc_py3_version }}"
+    path: "{{ noc_root }}/bin/python{{ noc_py3_ver }}"
 
 - name: Archive old py2 noc folder and delete pkg files
   block:
@@ -89,26 +89,26 @@
     - noc_bin_py3 is defined
     - not noc_bin_py3.stat.exists
 
-- name: Check if we have system Python of {{ noc_py3_version }} version
+- name: Check if we have system Python of {{ noc_py3_ver }} version
   register: noc_system_py3
   stat:
-    path: "/usr/bin/python{{ noc_py3_version }}"
+    path: "/usr/bin/python{{ noc_py3_ver }}"
 
 #- name: Decide what python to use
 #  set_fact:
-#    noc_init_python_path: "{{ '/usr/bin/pythonnoc_py3_version' if VAR == 'param_1' else 'value_2' if VAR == 'param_2' else 'value_3' }}"
+#    noc_init_python_path: "{{ '/usr/bin/pythonnoc_py3_ver' if VAR == 'param_1' else 'value_2' if VAR == 'param_2' else 'value_3' }}"
 
 - name: Decide to use system python3
   set_fact:
-    noc_init_python_path: "/usr/bin/python{{ noc_py3_version }}"
+    noc_init_python_path: "/usr/bin/python{{ noc_py3_ver }}"
   when: noc_system_py3.stat.exists
 
 #- name: Decide what python to use
 #  set_fact:
-#    noc_init_python_path: "/usr/bin/python{{ noc_py3_version }}"
-#  when: "{{ ansible_python.version.major }}.{{  ansible_python.version.minor }} == noc_py3_version"
+#    noc_init_python_path: "/usr/bin/python{{ noc_py3_ver }}"
+#  when: "{{ ansible_python.version.major }}.{{  ansible_python.version.minor }} == noc_py3_ver"
 
-- name: Compile Python of {{ noc_py3_version }} version
+- name: Compile Python of {{ noc_py3_ver }} version
   include_tasks: "compile_python.yml"
   when: not noc_system_py3.stat.exists
 
