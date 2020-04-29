@@ -32,7 +32,7 @@
 - name: "Python{{ noc_py3_ver }} | Compile and install"
   command: "{{ item }}"
   args:
-    chdir: "{{ py_data.sources }}"
+    chdir: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
   with_items:
     - "./configure --enable-optimizations --prefix /opt/python{{ noc_py3_ver }}"
     - make
