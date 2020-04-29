@@ -167,4 +167,4 @@
 - name: Install noc.pth
   template:
     src: "lib/python/site-packages/noc.pth.j2"
-    dest: "{{ noc_root }}/lib/python{{ ansible_python.version.major }}.{{ ansible_python.version.minor }}/site-packages/noc.pth"
+    dest: "{{ noc_root }}/lib/python{{ noc_py3_ver }}/site-packages/noc.pth"
