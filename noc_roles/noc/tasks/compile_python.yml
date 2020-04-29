@@ -34,7 +34,7 @@
   args:
     chdir: "{{ py_data.sources }}"
   with_items:
-    - "./configure --enable-optimizations --prefix {{ /opt/python{{ noc_py3_ver }} }}"
+    - "./configure --enable-optimizations --prefix /opt/python{{ noc_py3_ver }}"
     - make
     - make altinstall
   when: not already_installed.stat.exists
