@@ -6,7 +6,7 @@
     owner: "{{ noc_user }}"
     mode: 0755
   when:
-    - noc_python_interpreter == python
+    - noc_python_interpreter == "python"
 
 - name: Create required directories on py3  #hack. have to be fixed
   file:
@@ -15,7 +15,7 @@
     owner: "{{ noc_user }}"
     mode: 0755
   when:
-    - noc_python_interpreter == python3
+    - noc_python_interpreter == "python3"
 
 - name: Create required directories
   file:
