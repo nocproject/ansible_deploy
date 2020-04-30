@@ -26,7 +26,7 @@
     src: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
     dest: "/opt/python{{ noc_py3_ver }}/"
     creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
-    remote_src: yes
+    remote_src: true
   when: not already_installed.stat.exists
 
 - name: "Python{{ noc_py3_ver }} | Compile and install"
