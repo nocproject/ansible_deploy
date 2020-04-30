@@ -17,7 +17,7 @@ pypy_download_url_base: https://bitbucket.org/squeaky/portable-pypy/downloads
 pypy_download_url: "{{ pypy_download_url_base }}/pypy-{{ pypy_version }}-linux_x86_64-portable.tar.bz2"
 pypy_tmp_path: "{{ tower_dist_dir }}/pypy-{{ pypy_version }}-linux_x86_64-portable.tar.bz2"
 pypy_path: "{{ noc_root }}/../pypy"
-python_interpreter: python
+noc_python_interpreter: python
 bi_export_dir: "{{ noc_var_lib }}/bi"
 supervisorctl_key: "{{ lookup('supervisorctl_key', tower_data + '/noc/supervisorctl.key') }}"
 django_key: "{{ lookup('django_key', tower_data + '/noc/secret.key') }}"

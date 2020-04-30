@@ -103,10 +103,6 @@
   include_tasks: "compile_python.yml"
   when: not noc_system_py3.stat.exists
 
-- debug:
-    var: noc_init_python_path
-    verbosity: 5
-
 - name: Initialize virtualenv3
   pip:
     chdir: "{{ noc_root }}"
