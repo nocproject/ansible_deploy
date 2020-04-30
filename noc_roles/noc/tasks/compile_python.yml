@@ -29,6 +29,9 @@
     remote_src: true
   when: not already_installed.stat.exists
 
+- name: "Include OS-specific tasks for compiling"
+  include_tasks: "os/{{ ansible_distribution }}/for_compile.yml"
+
 - name: "Python{{ noc_py3_ver }} | Compile and install"
   command: "{{ item }}"
   args:
