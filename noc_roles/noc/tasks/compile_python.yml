@@ -14,8 +14,9 @@
 - name: "Python{{ noc_py3_ver }} | Download"
   get_url:
     url: "https://www.python.org/ftp/python/{{ py_version['py' ~ noc_py3_ver] }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
-    dest: "/opt/python{{ noc_py3_ver }}"
+    dest: "{{ python_tmp_path }}"
     checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
+  delegate_to: 127.0.0.1
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
@@ -23,10 +24,9 @@
 
 - name: "Python{{ noc_py3_ver }} | Uncompress"
   unarchive:
-    src: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
+    src: "{{ python_tmp_path }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
     dest: "/opt/python{{ noc_py3_ver }}/"
     creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
-    remote_src: true
   when: not already_installed.stat.exists
 
 - name: "Include OS-specific tasks for compiling"
