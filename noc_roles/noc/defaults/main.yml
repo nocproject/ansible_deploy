@@ -22,7 +22,7 @@ bi_export_dir: "{{ noc_var_lib }}/bi"
 supervisorctl_key: "{{ lookup('supervisorctl_key', tower_data + '/noc/supervisorctl.key') }}"
 django_key: "{{ lookup('django_key', tower_data + '/noc/secret.key') }}"
 supervisor_sock_path: /var/run/supervisor_noc.sock
-python_tmp_path: "{{ tower_dist_dir }}/python{{ noc_py3_ver }}"
+python_tmp_path: "{{ tower_dist_dir }}/python3"
 
 py_version:
   py3.6: "3.6.10"
