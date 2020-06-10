@@ -1,47 +1,24 @@
 ---
-- name: "Python{{ noc_py3_ver }} | Check that {{ noc_py3_ver }} is still not installed"
-  stat:
-    path: "/opt/python{{ noc_py3_ver }}/bin/python{{ noc_py3_ver }}"
-  register: already_installed
-  ignore_errors: true
-# @todo check of minor version
-
-- name: Create dir for compiling
-  file:
-    path: "/opt/python{{ noc_py3_ver }}"
-    state: directory
-  when: not already_installed.stat.exists
-
-- name: "Python{{ noc_py3_ver }} | Download"
+- name: "Python{{ noc_py3_ver }} | Download precompiled archive"
   get_url:
-    url: "https://www.python.org/ftp/python/{{ py_version['py' ~ noc_py3_ver] }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
+    url: "https://cdn.getnoc.com/noc/repo/{{ ansible_os_family }}/python{{ py_version['py' ~ noc_py3_ver] }}.tar.gz"
     dest: "{{ tower_dist_dir }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
-    checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
+    #checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
   delegate_to: 127.0.0.1
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
-  when: not already_installed.stat.exists
+
+- name: "Python{{ noc_py3_ver }} | Create dir for extracting"
+  file:
+    path: "/opt/python{{ noc_py3_ver }}"
+    state: directory
 
 - name: "Python{{ noc_py3_ver }} | Uncompress"
   unarchive:
     src: "{{ tower_dist_dir }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
     dest: "/opt/python{{ noc_py3_ver }}/"
     creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
-  when: not already_installed.stat.exists
-
-- name: "Include OS-specific tasks for compiling"
-  include_tasks: "os/{{ ansible_distribution }}/for_compile.yml"
-
-- name: "Python{{ noc_py3_ver }} | Compile and install"
-  command: "{{ item }}"
-  args:
-    chdir: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
-  with_items:
-    - "./configure --prefix /opt/python{{ noc_py3_ver }}"
-    - make
-    - make altinstall
-  when: not already_installed.stat.exists
 
 - name: Take path for new python3
   set_fact:

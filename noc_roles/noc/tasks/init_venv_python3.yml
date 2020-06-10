@@ -11,6 +11,13 @@
   stat:
     path: "{{ noc_root }}/bin/python{{ noc_py3_ver }}"
 
+- name: Check noc Python version
+  command: {{ noc_root|quote }}/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2
+  register: py3exists_version
+  when:
+    - noc_bin_py3 is defined
+    - noc_bin_py3.stat.exists
+
 - name: Archive old py2 noc folder and delete pkg files
   block:
     - name: archive current noc dir
@@ -18,6 +25,7 @@
         path: "{{noc_root}}"
         dest: "{{noc_root}}/../noc_on_python2.tbz"
         format: bz2
+      ignore_errors: True
 
     - name: check if we have custom settings.yml
       stat:
@@ -87,21 +95,37 @@
 
   when:
     - noc_bin_py3 is defined
-    - not noc_bin_py3.stat.exists
+    - >
+      not noc_bin_py3.stat.exists or
+      (py3exists_version is defined and
+      py3exists_version != py_version['py' ~ noc_py3_ver] and noc_py3_force_updates)
 
 - name: Check if we have system Python of {{ noc_py3_ver }} version
   register: noc_system_py3
   stat:
     path: "/usr/bin/python{{ noc_py3_ver }}"
 
+- name: Check system Python version
+  command: /usr/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2
+  register: py3sys_version
+  when: noc_system_py3.stat.exists
+
 - name: Decide to use system python3
   set_fact:
     noc_init_python_path: "/usr/bin/python{{ noc_py3_ver }}"
-  when: noc_system_py3.stat.exists
+  when:
+    - noc_system_py3.stat.exists
+    - >
+      py3sys_version is defined and
+      (py3sys_version == py_version['py' ~ noc_py3_ver] or not noc_py3_force_updates)
 
 - name: Compile Python of {{ noc_py3_ver }} version
   include_tasks: "compile_python.yml"
-  when: not noc_system_py3.stat.exists
+  when:
+    - >
+      not noc_system_py3.stat.exists or
+      (py3sys_version is defined and
+      (py3sys_version != py_version['py' ~ noc_py3_ver] and noc_py3_force_updates))
 
 - name: Initialize virtualenv3
   pip:
