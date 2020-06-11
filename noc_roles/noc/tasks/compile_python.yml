@@ -8,7 +8,7 @@
 
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
   get_url:
-    url: "https://cdn.getnoc.com/noc/repo/{{ ansible_os_family }}/python{{ py_version['py' ~ noc_py3_ver] }}.tar.gz"
+    url: "https://cdn.getnoc.com/noc/repo/{{ ansible_os_family }}/{{ ansible_distribution_major_version }}/python{{ py_version['py' ~ noc_py3_ver] }}.tar.gz"
     dest: "{{ tower_dist_dir }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
     #checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
   delegate_to: 127.0.0.1
