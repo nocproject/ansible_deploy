@@ -2,8 +2,8 @@
 - name: "Fail if Python version for download is not recommended"
   fail:
     msg: |
-       In case if system doesn't have Python of chosen version {{ noc_py3_ver }},
-       we recommend use last supported for that release. https://getnoc.com/blog/
+      In case if system doesn't have Python of chosen version {{ noc_py3_ver }},
+      we recommend use last supported for that release: https://getnoc.com/blog/
   when: noc_py3_ver == "3.7"
 
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
