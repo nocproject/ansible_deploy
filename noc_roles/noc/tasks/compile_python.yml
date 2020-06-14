@@ -8,7 +8,7 @@
 
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
   get_url:
-    url: "noc_python_url"
+    url: "{{ noc_python_url }}"
     dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.xz"
     #checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
   delegate_to: 127.0.0.1
