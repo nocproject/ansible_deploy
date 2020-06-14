@@ -7,9 +7,9 @@
       - 'min'
 
 - name: Check if we have NOC/bin/ folder with py3
-  register: noc_bin_py3
   stat:
     path: "{{ noc_root }}/bin/python{{ noc_py3_ver }}"
+  register: noc_bin_py3
 
 - name: Check noc Python version
   command: "{{ noc_root|quote }}/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2"
