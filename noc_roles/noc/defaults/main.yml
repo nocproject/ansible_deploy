@@ -23,7 +23,7 @@ supervisorctl_key: "{{ lookup('supervisorctl_key', tower_data + '/noc/supervisor
 django_key: "{{ lookup('django_key', tower_data + '/noc/secret.key') }}"
 supervisor_sock_path: /var/run/supervisor_noc.sock
 noc_py3_force_updates: false
-host_mount_points: {{ ansible_mounts|json_query('[].mount') }}
+host_mount_points: "{{ ansible_mounts|json_query('[].mount') }}"
 
 py_version:
   py3.6: "3.6.10"
