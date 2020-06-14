@@ -23,6 +23,7 @@ supervisorctl_key: "{{ lookup('supervisorctl_key', tower_data + '/noc/supervisor
 django_key: "{{ lookup('django_key', tower_data + '/noc/secret.key') }}"
 supervisor_sock_path: /var/run/supervisor_noc.sock
 noc_py3_force_updates: false
+noc_python_url: "https://cdn.getnoc.com/noc/repo/{{ ansible_os_family }}/{{ ansible_distribution_major_version }}/python{{ py_version['py' ~ noc_py3_ver] }}.tar.gz"
 
 py_version:
   py3.6: "3.6.10"
