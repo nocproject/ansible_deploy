@@ -106,7 +106,7 @@
     path: "/usr/bin/python{{ noc_py3_ver }}"
 
 - name: Check system Python version
-  command: /usr/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2
+  shell: /usr/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2
   register: py3sys_version
   when: noc_system_py3.stat.exists
 
