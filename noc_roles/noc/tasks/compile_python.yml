@@ -9,7 +9,7 @@
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
   get_url:
     url: "noc_python_url"
-    dest: "{{ tower_dist_dir }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
+    dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.xz"
     #checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
   delegate_to: 127.0.0.1
   environment:
@@ -23,9 +23,9 @@
 
 - name: "Python{{ noc_py3_ver }} | Uncompress"
   unarchive:
-    src: "{{ tower_dist_dir }}/Python-{{ py_version['py' ~ noc_py3_ver] }}.tar.xz"
+    src: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.xz"
     dest: "/opt/python{{ noc_py3_ver }}/"
-    creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_version['py' ~ noc_py3_ver] }}"
+    creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_rel_name }}"
 
 - name: Take path for new python3
   set_fact:

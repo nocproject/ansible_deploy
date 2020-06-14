@@ -98,7 +98,7 @@
     - >
         not noc_bin_py3.stat.exists or
         (py3exists_version is defined and
-        py3exists_version != py_version['py' ~ noc_py3_ver] and noc_py3_force_updates)
+        py3exists_version != py_rel_name and noc_py3_force_updates)
 
 - name: Check if we have system Python of {{ noc_py3_ver }} version
   register: noc_system_py3
@@ -117,7 +117,7 @@
     - noc_system_py3.stat.exists
     - >
         py3sys_version is defined and
-        (py3sys_version == py_version['py' ~ noc_py3_ver] or not noc_py3_force_updates)
+        (py3sys_version == py_rel_name or not noc_py3_force_updates)
 
 - name: Compile Python of {{ noc_py3_ver }} version
   include_tasks: "compile_python.yml"
@@ -125,7 +125,7 @@
     - >
         not noc_system_py3.stat.exists or
         (py3sys_version is defined and
-        (py3sys_version != py_version['py' ~ noc_py3_ver] and noc_py3_force_updates))
+        (py3sys_version != py_rel_name and noc_py3_force_updates))
 
 - name: Initialize virtualenv3
   pip:
