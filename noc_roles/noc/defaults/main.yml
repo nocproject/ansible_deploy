@@ -34,5 +34,5 @@ py_hashes:
   py3.7: "172c650156f7bea68ce31b2fd01fa766"
   py3.8: "3000cf50aaa413052aef82fd2122ca78"
 
-py_relname: "{{ py_version['py' ~ noc_py3_ver] }}"
+py_rel_name: "{{ py_version['py' ~ noc_py3_ver] }}"
 noc_python_url: "https://cdn.getnoc.com/noc/repo/{{ ansible_os_family }}/{{ ansible_distribution_major_version }}/python{{ py_rel_name }}.tar.gz"
