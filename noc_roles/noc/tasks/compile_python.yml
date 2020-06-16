@@ -17,7 +17,7 @@
 - name: "Python{{ noc_py3_ver }} | Download archive's checksum"
   get_url:
     url: "{{ noc_python_url ~ '_SHA1SUMS' }}"
-    dest: "/opt/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS"
+    dest: "{{ noc_dist }}"
     force: true
   environment:
     https_proxy: "{{ http_proxy }}"
@@ -27,7 +27,7 @@
   get_url:
     url: "{{ noc_python_url }}"
     dest: "/opt/Python-{{ py_rel_name }}.tar.gz"
-    checksum: "sha1:{{ lookup('file', '/opt/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS') }}"
+    checksum: "sha1:{{ lookup('file', '{{ noc_dist }}/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS') }}"
   register: python_archive_download
   environment:
     https_proxy: "{{ http_proxy }}"
