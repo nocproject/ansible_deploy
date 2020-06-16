@@ -6,27 +6,39 @@
       we recommend use last supported for that release: https://getnoc.com/blog/
   when: noc_py3_ver == "3.7"
 
-- name: "Python{{ noc_py3_ver }} | Download precompiled archive"
+- name: "Python{{ noc_py3_ver }} | Download archive's checksum"
   get_url:
-    url: "{{ noc_python_url }}"
-    dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.xz"
-    #checksum: "md5:{{ py_hashes['py' ~ noc_py3_ver] }}"
+    url: "{{ noc_python_url ~ '_SHA1SUMS' }}"
+    dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS"
+    force: true
   delegate_to: 127.0.0.1
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
 
-- name: "Python{{ noc_py3_ver }} | Create dir for extracting"
+- name: "Python{{ noc_py3_ver }} | Download precompiled archive"
+  get_url:
+    url: "{{ noc_python_url }}"
+    dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz"
+    checksum: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS"
+  delegate_to: 127.0.0.1
+  register: python_archive_download
+  environment:
+    https_proxy: "{{ http_proxy }}"
+    http_proxy: "{{ http_proxy }}"
+
+- name: "Python{{ noc_py3_ver }} | Ensure if there is dir for extracting"
   file:
     path: "/opt/python{{ noc_py3_ver }}"
     state: directory
 
 - name: "Python{{ noc_py3_ver }} | Uncompress"
   unarchive:
-    src: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.xz"
+    src: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz"
     dest: "/opt/python{{ noc_py3_ver }}/"
     creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_rel_name }}"
+  when: python_archive_download is changed
 
-- name: Take path for new python3
+- name: Take path for Python3
   set_fact:
     noc_init_python_path: "/opt/python{{ noc_py3_ver }}/bin/python{{ noc_py3_ver }}"

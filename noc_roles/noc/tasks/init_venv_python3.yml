@@ -12,10 +12,9 @@
   register: noc_bin_py3
 
 - name: Check noc Python version
-  command: "{{ noc_root|quote }}/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2"
+  shell: "{{ noc_root|quote }}/bin/python{{ noc_py3_ver|quote }} -V | cut -d' ' -f 2"
   register: py3exists_version
   when:
-    - noc_bin_py3 is defined
     - noc_bin_py3.stat.exists
 
 - name: Archive old py2 noc folder and delete pkg files
@@ -23,7 +22,7 @@
     - name: archive current noc dir
       archive:
         path: "{{noc_root}}"
-        dest: "{{noc_root}}/../noc_on_python2.tbz"
+        dest: "{{noc_root}}/../noc_on_old_python.tbz"
         format: bz2
       ignore_errors: true
 
@@ -94,7 +93,6 @@
       when: stat_result.stat.exists
 
   when:
-    - noc_bin_py3 is defined
     - >
         not noc_bin_py3.stat.exists or
         (py3exists_version is defined and
@@ -110,7 +108,7 @@
   register: py3sys_version
   when: noc_system_py3.stat.exists
 
-- name: Decide to use system python3
+- name: Decide to use system's python3
   set_fact:
     noc_init_python_path: "/usr/bin/python{{ noc_py3_ver }}"
   when:
