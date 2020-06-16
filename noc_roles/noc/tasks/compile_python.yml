@@ -20,7 +20,7 @@
   get_url:
     url: "{{ noc_python_url }}"
     dest: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz"
-    checksum: "{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS"
+    checksum: "sha1:{{ tower_dist_dir }}/Python-{{ py_rel_name }}.tar.gz_SHA1SUMS"
   delegate_to: 127.0.0.1
   register: python_archive_download
   environment:
