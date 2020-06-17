@@ -24,7 +24,8 @@
     http_proxy: "{{ http_proxy }}"
 
 - name: "Python{{ noc_py3_ver }} | Read checksum"
-  slurp: "{{ noc_dist }}/python{{ py_rel_name }}.tar.gz_SHA1SUMS"
+  slurp:
+    src: "{{ noc_dist }}/python{{ py_rel_name }}.tar.gz_SHA1SUMS"
   register: python_checksum
 
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
