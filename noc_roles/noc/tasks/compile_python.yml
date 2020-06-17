@@ -43,6 +43,7 @@
     src: "{{ noc_dist }}/Python-{{ py_rel_name }}.tar.gz"
     dest: "/opt/python{{ noc_py3_ver }}/"
     creates: "/opt/python{{ noc_py3_ver }}/Python-{{ py_rel_name }}"
+    remote_src: true
   when: python_archive_download is changed
 
 - name: Take path for Python3
