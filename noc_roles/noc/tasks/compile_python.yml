@@ -2,8 +2,8 @@
 - name: "Fail if Python version for download is not recommended"
   fail:
     msg: |
-      In case if system doesn't have Python of chosen version {{ noc_py3_ver }},
-      we recommend use last supported for that release: https://getnoc.com/blog/
+      In case if system doesn't have system Python of chosen version {{ noc_py3_ver }},
+      we recommend to use last supported for that release: https://getnoc.com/blog/
   when: noc_py3_ver == "3.7"
 
 - name: Create dirs for Python's archives
@@ -23,11 +23,15 @@
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
 
+- name: "Python{{ noc_py3_ver }} | Read checksum"
+  slurp: "{{ noc_dist }}/python{{ py_rel_name }}.tar.gz_SHA1SUMS"
+  register: python_checksum
+
 - name: "Python{{ noc_py3_ver }} | Download precompiled archive"
   get_url:
     url: "{{ noc_python_url }}"
     dest: "{{ noc_dist }}/Python-{{ py_rel_name }}.tar.gz"
-    checksum: "sha1:{{ lookup('file', '{{ noc_dist }}/python{{ py_rel_name }}.tar.gz_SHA1SUMS') }}"
+    checksum: "sha1:{{ python_checksum['content'] | b64decode }}"
   register: python_archive_download
   environment:
     https_proxy: "{{ http_proxy }}"
