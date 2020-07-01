@@ -26,11 +26,11 @@ class LookupModule(LookupBase):
                 if not os.path.exists(d):
                     os.makedirs(d, mode=0o700)
                 # Generate key file
-                key = str(base64.b64encode(os.urandom(741))).strip()
-                with open(path, "w") as f:
+                key = str(base64.b64encode(os.urandom(741)).decode())
+                with open(path, "wt") as f:
                     os.chmod(path, 0o600)
                     f.write(key)
                 return [key]
             else:
-                with open(path, "r") as f:
+                with open(path, "rt") as f:
                     return [f.read()]
