@@ -212,7 +212,7 @@
   tags:
     - requirements
 
-- name: Install node python packages
+- name: Install ALL necessary python packages
   pip:
     chdir: "{{ noc_root }}"
     name: "{{ noc_pip_packages }}"
