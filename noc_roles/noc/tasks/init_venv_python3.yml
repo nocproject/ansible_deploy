@@ -199,24 +199,6 @@
   tags:
     - requirements
 
-- name: Print packages 1
-  debug:
-    var: node_noc_components | replace('\r\n', ' ')
-  when:
-    - single_req.stat.exists
-
-- name: Print packages 2
-  debug:
-    var: node_noc_components | replace('\n\r', ' ')
-  when:
-    - single_req.stat.exists
-
-- name: Print packages 3
-  debug:
-    var: node_noc_components | trim
-  when:
-    - single_req.stat.exists
-
 - name: Generate package list for install
   command: "./scripts/build/get-noc-requirements.py {{ node_noc_components | replace('\r\n', ' ') }}"
   args:
@@ -236,7 +218,7 @@
 - name: Install ALL necessary python packages
   pip:
     chdir: "{{ noc_root }}"
-    name: "{{ noc_pip_packages }}"
+    name: "{{ noc_pip_packages | replace('\n', ' ')}}"
     virtualenv: "{{ noc_root }}"
     extra_args: "--upgrade"
   environment:
