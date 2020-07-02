@@ -218,7 +218,7 @@
 - name: Install ALL necessary python packages
   pip:
     chdir: "{{ noc_root }}"
-    name: "{{ noc_pip_packages | replace('\n', ' ')}}"
+    name: "{{ noc_pip_packages.stdout.split('\n') }}"
     virtualenv: "{{ noc_root }}"
     extra_args: "--upgrade"
   environment:
