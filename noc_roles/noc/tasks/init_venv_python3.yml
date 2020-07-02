@@ -208,13 +208,6 @@
   tags:
     - requirements
 
-- name: Print packages
-  debug:
-    var: noc_pip_packages
-  when:
-    - single_req.stat.exists
-
-
 - name: Install ALL necessary python packages
   pip:
     chdir: "{{ noc_root }}"
