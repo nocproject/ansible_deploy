@@ -27,10 +27,10 @@ class LookupModule(LookupBase):
                     os.makedirs(d, mode=0o700)
                 # Generate key file
                 key = str(base64.b64encode(os.urandom(741)).decode())
-                with open(path, "wt") as f:
+                with open(path, "w") as f:
                     os.chmod(path, 0o600)
                     f.write(key)
                 return [key]
             else:
-                with open(path, "rt") as f:
+                with open(path, "r") as f:
                     return [f.read()]

@@ -13,6 +13,7 @@
       - libmemcached
       - git
       - zstd
+      - proj
   tags:
     - requirements
   register: freebsd_pkg_result

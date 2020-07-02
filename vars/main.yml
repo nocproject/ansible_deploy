@@ -3,6 +3,7 @@
 #
 # for os specific see pre role
 etc_prefix: /etc
+bin_prefix: /usr/bin
 
 # packages
 grafana_version: "6.7.3"
