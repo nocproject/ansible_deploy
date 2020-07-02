@@ -202,6 +202,8 @@
 - name: Print packages
   debug:
     var: "{{ node_noc_components }}"
+  when:
+    - single_req.stat.exists
 
 - name: Generate package list for install
   command: "./scripts/build/get-noc-requirements.py {{ node_noc_components }}"
