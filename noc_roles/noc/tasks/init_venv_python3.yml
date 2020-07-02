@@ -199,20 +199,39 @@
   tags:
     - requirements
 
-- name: Print packages
+- name: Print packages 1
   debug:
-    var: node_noc_components | replace('\n', ' ')
+    var: node_noc_components | replace('\r\n', ' ')
+  when:
+    - single_req.stat.exists
+
+- name: Print packages 2
+  debug:
+    var: node_noc_components | replace('\n\r', ' ')
+  when:
+    - single_req.stat.exists
+
+- name: Print packages 3
+  debug:
+    var: node_noc_components | trim
   when:
     - single_req.stat.exists
 
 - name: Generate package list for install
-  command: "./scripts/build/get-noc-requirements.py {{ node_noc_components | replace('\n', ' ') }}"
+  command: "./scripts/build/get-noc-requirements.py {{ node_noc_components | replace('\r\n', ' ') }}"
   args:
     chdir: "{{ noc_root }}"
   register: noc_pip_packages
   when: single_req.stat.exists
   tags:
     - requirements
+
+- name: Print packages
+  debug:
+    var: noc_pip_packages
+  when:
+    - single_req.stat.exists
+
 
 - name: Install ALL necessary python packages
   pip:
