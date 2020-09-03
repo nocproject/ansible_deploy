@@ -25,7 +25,7 @@ lint:
 
 .base_builder:
   stage: build
-  image: registry.getnoc.com/infrastructure/molecule-docker:master
+  image: registry.getnoc.com/infrastructure/molecule-docker:revert-py3
   before_script:
     - echo ${ssh_identity_text} | tr -d ' ' | base64 -d > /tmp/temporary_ssh_key
     - chmod 0400 /tmp/temporary_ssh_key
