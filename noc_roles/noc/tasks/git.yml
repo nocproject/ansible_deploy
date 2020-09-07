@@ -39,7 +39,7 @@
   when: noc_env_type == 'dev'
 
 - name: Fetch tags force
-  command: "git fetch {{ noc_repo }} --tags --force --prune --prune-tags"
+  command: "git fetch {{ noc_repo }} --tags --force --prune"
   args:
     chdir: "{{ noc_root }}"
   environment:
