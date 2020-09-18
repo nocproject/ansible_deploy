@@ -47,7 +47,7 @@
       - libjemalloc2
       - gcc
       - libpq-dev
-      - libffi6m
+      - libffi6
       - libffi-dev
       - libmemcached11
       - libmemcached-dev
