@@ -16,6 +16,7 @@
           command: /tmp/mc mirror {{ pip_cache_dir }} {{ minio_bucket }}/pip/ --overwrite
 
         - name: upload pkg cache
-          command: sudo /tmp/mc mirror {{ pkg_cache_dir }} {{ minio_bucket }}/pkgs/ --overwrite
+          command: /tmp/mc mirror {{ pkg_cache_dir }} {{ minio_bucket }}/pkgs/ --overwrite
+          become: yes
 
       when: use_cache
