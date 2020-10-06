@@ -2,7 +2,12 @@
 forms:
   nats:
     description: >
-      Some description of Nats-server
+      <strong>Service type</strong>: External <br/>
+      <strong>Short description</strong>: Nats messaging system <br/>
+      <strong>Long description</strong>: NATS is a messaging platform that functions like a central nervous system <br/>
+      <strong>Scale Recommendations</strong>: At least one per system, or 3 like cluster. <br/>
+      <strong>docs</strong>: <a href=https://docs.nats.io/nats-server/configuration target=_blank>Nats docs</a> <br/>
+      <strong>Placement constraint</strong>: On node with Liftbridge <br/>
     cluster_user:
       default: noc
       label: user for replication
