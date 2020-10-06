@@ -12,4 +12,3 @@
     - "{{ nats_data_path }}"
     - "{{ nats_log_path }}"
     - "{{ nats_run_path }}"
-
