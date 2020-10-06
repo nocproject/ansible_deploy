@@ -29,4 +29,3 @@
     - restart nats
   tags:
     - config
-
