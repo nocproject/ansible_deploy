@@ -1,0 +1,26 @@
+---
+forms:
+  nats:
+    description: >
+      Some description of Nats-server
+    cluster_user:
+      default: noc
+      label: user for replication
+      type: str
+    cluster_password:
+      default: noc
+      label: password for replication
+      type: str
+    loglevel:
+      default: info
+      label: Loglevel
+      type: list
+      options:
+        - debug
+        - info
+
+services:
+  nats:
+    level: system
+    category: external
+    port: 4222
