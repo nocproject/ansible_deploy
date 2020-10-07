@@ -994,6 +994,15 @@ all:
     svc-mrt-exec:
       hosts:
         noc_node_oel7: {}
+    svc-nats:
+      children:
+        cfg-nats-noc-node-oel7:
+          hosts:
+            noc-node-oel7: {}
+        svc-nats-read: {}
+    svc-nats-exec:
+      hosts:
+        noc-node-oel7: {}
     svc-nbi:
       children:
         cfg-nbi-noc_node_oel7:

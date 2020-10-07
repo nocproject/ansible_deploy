@@ -994,6 +994,15 @@ all:
     svc-mrt-exec:
       hosts:
         noc-node-ubuntu16: {}
+    svc-nats:
+      children:
+        cfg-nats-noc-node-ubuntu16:
+          hosts:
+            noc-node-ubuntu16: {}
+        svc-nats-read: {}
+    svc-nats-exec:
+      hosts:
+        noc-node-ubuntu16: {}
     svc-nbi:
       children:
         cfg-nbi-noc-node-ubuntu16:
