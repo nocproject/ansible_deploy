@@ -1,5 +1,5 @@
 file:
-  {{ consul_template_config_dir }}/nats-server.conf:
+  {{ nats_config_path }}/nats-server.conf:
     exists: true
     mode: "0600"
     owner: {{ nats_user }}
