@@ -12,4 +12,3 @@
     - "{{ liftbridge_data_path }}"
     - "{{ liftbridge_log_path }}"
     - "{{ liftbridge_run_path }}"
-
