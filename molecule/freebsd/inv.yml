@@ -950,12 +950,12 @@ all:
         noc-node-freebsd12: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-freebsd12
+        cfg-liftbridge-noc-node-freebsd12: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - freebsd12
+        noc-node-freebsd12: {}
     svc-login:
       children:
         cfg-login-noc-node-freebsd12:

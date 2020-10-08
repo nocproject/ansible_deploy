@@ -950,12 +950,12 @@ all:
         noc-node-ubuntu18: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-ubuntu18
+        cfg-liftbridge-noc-node-ubuntu18: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - ubuntu18
+        noc-node-ubuntu18: {}
     svc-login:
       children:
         cfg-login-noc-node-ubuntu18:

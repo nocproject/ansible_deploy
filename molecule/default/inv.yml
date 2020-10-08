@@ -950,12 +950,12 @@ all:
         noc-node-centos7: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-centos7
+        cfg-liftbridge-noc-node-centos7: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - centos7
+        noc-node-centos7: {}
     svc-login:
       children:
         cfg-login-noc-node-centos7:

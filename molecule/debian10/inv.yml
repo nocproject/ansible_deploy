@@ -959,12 +959,12 @@ all:
         noc-node-debian10: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-debian10
+        cfg-liftbridge-noc-node-debian10: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - debian10
+        noc-node-debian10: {}
     svc-mailsender:
       children:
         cfg-mailsender-noc-node-debian10:

@@ -959,12 +959,12 @@ all:
         noc-node-ubuntu16: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-ubuntu16
+        cfg-liftbridge-noc-node-ubuntu16: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - ubuntu16
+        noc-node-ubuntu16: {}
     svc-mailsender:
       children:
         cfg-mailsender-noc-node-ubuntu16:

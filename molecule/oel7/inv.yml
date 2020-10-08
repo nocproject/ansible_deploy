@@ -959,12 +959,12 @@ all:
         noc_node_oel7: {}
     svc-liftbridge:
       children:
-      - cfg-liftbridge-oel7
+        cfg-liftbridge-noc-node-oel7: {}
       vars:
         liftbridge_loglevel: info
     svc-liftbridge-exec:
       hosts:
-      - oel7
+        noc-node-oel7: {}
     svc-mailsender:
       children:
         cfg-mailsender-noc_node_oel7:
