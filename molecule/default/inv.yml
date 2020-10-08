@@ -76,6 +76,7 @@ all:
           has_svc_goss: true
           has_svc_grafana: true
           has_svc_grafanads: true
+          has_svc_liftbridge: true
           has_svc_login: true
           has_svc_mailsender: true
           has_svc_memcached: true
@@ -947,6 +948,14 @@ all:
     svc-grafanads-exec:
       hosts:
         noc-node-centos7: {}
+    svc-liftbridge:
+      children:
+      - cfg-liftbridge-centos7
+      vars:
+        liftbridge_loglevel: info
+    svc-liftbridge-exec:
+      hosts:
+      - centos7
     svc-login:
       children:
         cfg-login-noc-node-centos7:
