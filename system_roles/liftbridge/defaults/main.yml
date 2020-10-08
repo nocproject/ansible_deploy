@@ -20,7 +20,6 @@ config:
   clustering: "{{ cluster_config }}"
   nats.servers: "{{ nats_servers }}"
 
-
 liftbridge_isr_count: 1
 
 ## Package
@@ -31,7 +30,6 @@ liftbridge_temp_file_checksum: "{{ tower_dist_dir }}/{{ liftbridge_version }}.ch
 liftbridge_temp_file: "{{ tower_dist_dir }}/{{ liftbridge_pkg }}"
 liftbridge_temp_unarchive: "/tmp/liftbridge/{{ liftbridge_version }}"
 liftbridge_pkg: "liftbridge_{{ liftbridge_version }}_linux_amd64.tar.gz"
-
 
 ## Paths
 liftbridge_data: "/var/liftbridge"
