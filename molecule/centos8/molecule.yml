@@ -19,7 +19,7 @@ lint:
 platforms:
   - name: noc-node-centos8
     distr: centos8
-    ssh_user: centos
+    ssh_user: cloud-user
 provisioner:
   name: ansible
   config_options:
