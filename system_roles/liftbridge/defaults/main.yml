@@ -44,3 +44,6 @@ liftbridge_config_path: "{{ etc_prefix }}/liftbridge"
 ## System user and group
 liftbridge_user: "liftbridge"
 liftbridge_group: "bin"
+
+## Defaults
+liftbridge_loglevel: info
