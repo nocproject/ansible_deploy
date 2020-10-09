@@ -46,11 +46,20 @@ lint:
     - branches@noc/ansible_deploy
     - master@noc/ansible_deploy
 
-build_centos:
+build_centos7:
   extends: .base_builder
   variables:
     PKG_CACHE: /var/cache/yum
     SCENARIO_NAME: default
+  tags:
+    - cloud
+    - docker
+
+build_centos8:
+  extends: .base_builder
+  variables:
+    PKG_CACHE: /var/cache/yum
+    SCENARIO_NAME: centos8
   tags:
     - cloud
     - docker
