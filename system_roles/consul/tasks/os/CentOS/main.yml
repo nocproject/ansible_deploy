@@ -1,5 +1,5 @@
 ---
-- name: Install CentOS consul depends
+- name: Install CentOS 7 consul depends
   yum:
     name: python-virtualenv
     state: present
@@ -7,6 +7,21 @@
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
+  wheh:
+    - ansible_distribution_version is version(7, '<=')
+  tags:
+    - requirements
+
+- name: Install CentOS 8+ consul depends
+  yum:
+    name: python2-virtualenv
+    state: present
+    update_cache: "True"
+  environment:
+    https_proxy: "{{ http_proxy }}"
+    http_proxy: "{{ http_proxy }}"
+  wheh:
+    - ansible_distribution_version is version(7, '>')
   tags:
     - requirements
 
