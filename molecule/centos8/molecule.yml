@@ -48,7 +48,7 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: default
+  name: centos8
   test_sequence:
     - create
     - prepare
