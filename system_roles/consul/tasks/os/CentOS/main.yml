@@ -7,7 +7,7 @@
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
-  wheh:
+  when:
     - ansible_distribution_version is version(7, '<=')
   tags:
     - requirements
@@ -20,7 +20,7 @@
   environment:
     https_proxy: "{{ http_proxy }}"
     http_proxy: "{{ http_proxy }}"
-  wheh:
+  when:
     - ansible_distribution_version is version(7, '>')
   tags:
     - requirements
