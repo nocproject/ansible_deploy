@@ -25,6 +25,11 @@
   tags:
     - requirements
 
+- set_fact:
+    virtualenv_executable: "/usr/bin/virtualenv-2"
+  when:
+    - ansible_distribution_version is version(7, '>')
+
 - name: systemd script
   template:
     src: consul_systemd.service.j2
