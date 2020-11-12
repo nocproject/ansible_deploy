@@ -83,3 +83,7 @@
           Please consider upgrade tower https://code.getnoc.com/noc/tower/-/blob/master/UPDATING.md
       when:
         - noc_ver_numb_rel is version('20.4', '>=')
+  when:
+    - has_svc_noc is defined
+  tags:
+    - checks
