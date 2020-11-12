@@ -56,3 +56,30 @@
     - has_svc_omap is defined
   tags:
     - checks
+
+- block:
+    - name: Download source archieve
+      unarchive:
+        src: "https://code.getnoc.com/noc/noc/-/archive/{{ noc_version }}/noc-{{ noc_version }}.tar.gz"
+        remote_src: true
+        dst: "{{ tower_dist_dir }}"
+      environment:
+        https_proxy: "{{ http_proxy }}"
+
+    - name: Check NOC version 1/2
+      slurp:
+        src: "{{ tower_dist_dir }}/noc-{{ noc_version }}/VERSION"
+      register: noc_version_number_base
+
+    - name: Check NOC version 2/2
+      set_fact:
+        noc_ver_numb_rel: "{{ noc_version_number_base.content | b64decode }}"
+
+    - name: Fail about too new NOC for this tower
+      fail:
+        msg: |
+          Possibly you try to deploy NOC with old tower version {{ tower_version }}
+          NOC releases older than 20.3 should be deployed with tower 1.0.0+ version.
+          Please consider upgrade tower https://code.getnoc.com/noc/tower/-/blob/master/UPDATING.md
+      when:
+        - noc_ver_numb_rel is version('20.4', '>=')
