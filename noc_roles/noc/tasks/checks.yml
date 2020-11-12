@@ -58,11 +58,11 @@
     - checks
 
 - block:
-    - name: Download source archieve
+    - name: Download source archive
       unarchive:
         src: "https://code.getnoc.com/noc/noc/-/archive/{{ noc_version }}/noc-{{ noc_version }}.tar.gz"
         remote_src: true
-        dst: "{{ tower_dist_dir }}"
+        dest: "{{ tower_dist_dir }}"
       environment:
         https_proxy: "{{ http_proxy }}"
 
