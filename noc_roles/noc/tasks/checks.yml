@@ -63,12 +63,14 @@
         src: "https://code.getnoc.com/noc/noc/-/archive/{{ noc_version }}/noc-{{ noc_version }}.tar.gz"
         remote_src: true
         dest: "{{ tower_dist_dir }}"
+      delegate_to: 127.0.0.1
       environment:
         https_proxy: "{{ http_proxy }}"
 
     - name: Check NOC version 1/2
       slurp:
         src: "{{ tower_dist_dir }}/noc-{{ noc_version }}/VERSION"
+      delegate_to: 127.0.0.1
       register: noc_version_number_base
 
     - name: Check NOC version 2/2
