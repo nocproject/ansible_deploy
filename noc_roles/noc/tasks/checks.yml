@@ -59,13 +59,18 @@
 
 - block:
     - name: Download source archive
-      unarchive:
-        src: "https://code.getnoc.com/noc/noc/-/archive/{{ noc_version }}/noc-{{ noc_version }}.tar.gz"
-        remote_src: true
+      get_url:
+        url: "https://code.getnoc.com/noc/noc/-/archive/{{ noc_version }}/noc-{{ noc_version }}.zip"
         dest: "{{ tower_dist_dir }}"
       delegate_to: 127.0.0.1
       environment:
         https_proxy: "{{ http_proxy }}"
+
+    - name: Unarchive source code for checks
+      command:
+        chdir: "{{ tower_dist_dir }}"
+        cmd: "/usr/bin/unzip noc-{{ noc_version }}.zip"
+      delegate_to: 127.0.0.1
 
     - name: Check NOC version 1/2
       slurp:
