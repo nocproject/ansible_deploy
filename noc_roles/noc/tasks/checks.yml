@@ -69,7 +69,9 @@
     - name: Unarchive source code for checks
       command:
         chdir: "{{ tower_dist_dir }}"
-        cmd: "/usr/bin/unzip noc-{{ noc_version }}.zip"
+        cmd: "/usr/bin/unzip -o noc-{{ noc_version }}.zip"
+      args:
+        warn: false
       delegate_to: 127.0.0.1
 
     - name: Check NOC version 1/2
